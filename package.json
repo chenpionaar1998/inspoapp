@@ -1,26 +1,36 @@
 {
-  "name": "react-express-postgres-heroku",
-  "version": "1.0.0",
-  "engines": {
-    "node": "8.x.x",
-    "npm": "5.x.x"
-  },
+  "name": "inspoapp",
+  "version": "0.1.0",
   "private": true,
-  "description": "Create React App with Express API and Postgres in Heroku",
+  "dependencies": {
+    "@types/jest": "24.0.23",
+    "@types/node": "12.12.12",
+    "@types/react": "16.9.13",
+    "@types/react-dom": "16.9.4",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.2.0",
+    "typescript": "3.7.2"
+  },
   "scripts": {
-    "postinstall": "npm --prefix react-ui install && npm --prefix server install",
-    "start:dev": "concurrently 'npm run --prefix react-ui start' 'npm run --prefix server start'",
-    "heroku-postbuild": "npm run --prefix react-ui build",
-    "start": "cd server && NODE_ENV=production node server.js"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "author": "Ari Autio <ari.autio@iki.fi>",
-  "license": "MIT",
-  "devDependencies": {
-    "concurrently": "^3.5.0"
+  "eslintConfig": {
+    "extends": "react-app"
   },
-  "cacheDirectories": [
-    "node_modules",
-    "react-ui/node_modules",
-    "server/node_modules"
-  ]
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

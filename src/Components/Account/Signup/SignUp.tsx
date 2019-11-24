@@ -16,7 +16,7 @@ export default class SignUp extends React.PureComponent {
                 <div className="account_card">
                     <SignUpForm  />
                     <div className="account_have-account">
-                    <span>Already have an account? <Link to="/login">Login</Link></span>
+                        <span>Already have an account? <Link to="/signin">Login</Link></span>
                     </div>
                 </div>
                 </div>

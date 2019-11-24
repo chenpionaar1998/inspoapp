@@ -12,9 +12,15 @@ export default class AppRouter extends React.PureComponent {
         return (
             <Router>
                 <Switch>
-                    <Route exact path="/" compoonent={SignIn}/>
-                    <Route exact path="/signup" component={SignUp} />
-                    <Route path="/signin" component={SignIn} />
+                    <Route exact path="/">
+                        <SignIn/>
+                    </Route>
+                    <Route exact path="/signup">
+                        <SignUp/>
+                    </Route>
+                    <Route path="/signin">
+                        <SignIn/>
+                    </Route>
                 </Switch>
             </Router>
         );

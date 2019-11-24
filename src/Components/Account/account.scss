@@ -174,7 +174,7 @@
     border-radius: 5px;
     padding: 9px;
     margin-right: 10px;
-    transition: all 0.3s;
+    transition: all 0.5s;
     border: none;
   
     &:last-child {
@@ -224,7 +224,7 @@
   
     a {
       color: $color-blue;
-      transition: all 0.3s;
+      transition: all 0.5s;
   
       &:hover {
         color: $color-blue-hover;

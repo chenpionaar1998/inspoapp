@@ -1,12 +1,12 @@
 // Taken from https://www.codementor.io/muhammedali956/implementing-dynamic-form-validators-in-reactjs-6j7q0l8e7
-const validator = {
+const validator: validatorType= {
     email: {
         rules: [
             {
                 test: (value: string) => {
                     return value.length > 0;
                 },
-                message: '*email cannot be empty'
+                message: 'Email cannot be empty'
             }
         ],
         errors: [],
@@ -16,14 +16,11 @@ const validator = {
     password: {
         rules: [
             {
-                test: /^(?=.*[a-z])(?=.*[A-Z]).*$/,
-                message: '*password must contain at least one lowercase letter, one uppercase letter'
-            },
-            {
                 test: (value: string) => {
-                    return value.length >= 8;
+                    const reg = RegExp(/^(?=.*[a-z])(?=.*[A-Z]).*$/);
+                    return reg.test(value) || value.length >= 8 ;
                 },
-                message: '*password must be at least 8 characters'
+                message: 'Password must contain at least one lowercase letter, one uppercase letter and be at least 8 characters long'
             }
         ],
         errors: [],
@@ -36,7 +33,7 @@ const validator = {
                 test: (value: string) => {
                     return value.length > 0;
                 },
-                message: '*first name cannot be empty'
+                message: 'First name cannot be empty'
             }
         ],
         errors: [],
@@ -49,7 +46,7 @@ const validator = {
                 test: (value: string) => {
                     return value.length > 0;
                 },
-                message: '*last name cannot be empty'
+                message: 'Last name cannot be empty'
             }
         ],
         errors: [],
@@ -59,10 +56,19 @@ const validator = {
 }
 
 export type validatorType = {
-    email: string;
-    password: string;
-    fname: string;
-    lname: string;
+    [key: string]: validatorObject;
+}
+
+export type validatorObject = {
+    rules: Array<ruleType>;
+    errors: Array<string>;
+    valid: boolean;
+    state: string;
+}
+
+type ruleType = {
+    test: (value: string) => boolean;
+    message: string;
 }
 
 export default validator;

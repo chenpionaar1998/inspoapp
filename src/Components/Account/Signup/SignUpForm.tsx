@@ -1,6 +1,5 @@
 // Libraries
 import React from 'react';
-// import { Field, reduxForm } from 'redux-form';
 
 // Icons
 import EyeIcon from 'mdi-react/EyeIcon';
@@ -9,119 +8,107 @@ import AccountOutlineIcon from 'mdi-react/AccountOutlineIcon';
 import MailRuIcon from 'mdi-react/MailRuIcon';
 
 // Components
-import validator, {validatorType} from './util';
+import validator, {validatorType} from './validator';
 
 // Styles
 import '../../../Scss/form.scss';
 
-
 type SignUpFormState = {
-    email: string;
-    password: string;
-    fname: string;
-    lname: string;
+    formInput: formInputType;
     showPassword: boolean;
     USERINSERTED: boolean;
-    // validator: validatorType;
-
 }
 
-export default class SignUpForm extends React.PureComponent<{}, SignUpFormState> {
-    state = {
-        email: '',
+type formInputType = {
+  email: string;
+  password: string;
+  fname: string;
+  lname: string;
+}
+
+export default class SignUpForm extends React.Component<{}, SignUpFormState> {
+  state = {
+      formInput: 
+        { email: '',
         password: '',
         fname: '',
-        lname: '',
-        showPassword: false,
-        USERINSERTED: false
-    };
+        lname: '' },
+      showPassword: false,
+      USERINSERTED: false
+  };
 
-    // showPassword = showPassword.bind(this);
-
-//   constructor(props) {
-//     super(props);
-
-    // this.validator = validator;
-    // this.resetValidator();
-    // this.resetValidator = this.resetValidator.bind(this);
-    // this.handleInputChange = this.handleInputChange.bind(this);
-    // this.updateValidators = this.updateValidators.bind(this);
-    // this.displayValidationErrors = this.displayValidationErrors.bind(this);
-    // this.addUser = this.addUser.bind(this);
-
-    // this.fnameInput = React.createRef();
-    // this.lnameInput = React.createRef();
-    // this.emailInput = React.createRef();
-    // this.passwordInput = React.createRef();
-
-//   };
+  validator: validatorType = validator;
 
   componentDidMount() {
+    // Disable submit button
     const submitButton = document.getElementById("submit") as HTMLButtonElement;
-    if (submitButton) submitButton.disabled = true;
+    if (submitButton) {
+      submitButton.disabled = true;
+    }
+
+    // Initialize validator
+    this.resetValidator();
   }
 
-//   resetValidator() {
-//     Object.keys(this.validator).forEach((fieldName) => {
-//       this.validator[fieldName].errors = [];
-//       this.validator[fieldName].state = '';
-//       this.validator[fieldName].valid = false;
-//     });
-//   }
+  resetValidator = () => {
+    for (let key of Object.entries(validator)) {
+      key[1].errors = [];
+      key[1].state = '';
+      key[1].valid = false;
+    }
+  }
 
-//   handleInputChange(event, inputPropName) {
-//     const newState = Object.assign({}, this.state);
-//     // newState.inputPropName = event.target.value;
-//     this.setState(newState);
-//     this.updateValidators(inputPropName, event.target.value);
-//   }
+  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, inputPropName: string) => {
+    const newState = Object.assign({}, this.state);
+    this.setState(newState);
 
-//   updateValidators(fieldName, value) {
-//     this.validator[fieldName].errors = [];
-//     this.validator[fieldName].state = value;
-//     this.validator[fieldName].valid = true;
-//     this.validator[fieldName].rules.forEach((rule) => {
-//       if (rule.test instanceof RegExp) {
-//         if (!rule.test.test(value)) {
-//           this.validator[fieldName].errors.push(rule.message);
-//           this.validator[fieldName].valid = false;
-//         }
-//       } else if (typeof rule.test === 'function') {
-//         if (!rule.test(value)) {
-//           this.validator[fieldName].errors.push(rule.message);
-//           this.validator[fieldName].valid = false;
-//         }
-//       }
-//     });
-//     let status = true;
-//     Object.keys(this.validator).forEach((field) => {
-//       if (!this.validator[field].valid) {
-//         status = false;
-//       }
-//     });
-//     document.getElementById('submit').disabled = status ? false : true;
-//   }
+    this.updateValidators(inputPropName, event.target.value);
+  }
 
-//   displayValidationErrors(fieldName) {
-//     const validator = this.validator[fieldName];
-//     const result = '';
-//     if (validator && !validator.valid) {
-//       const errors = validator.errors.map((info, index) => {
-//         return (
-//           <div>
-//             <span className="error" key={index}> {info}</span>
-//             <br />
-//           </div >
-//         );
-//       });
-//       return (
-//         <div>
-//           {errors}
-//         </div>
-//       );
-//     }
-//     return result;
-//   }
+  updateValidators = (fieldName: string, value: string) => {
+    this.validator[fieldName].errors = [];
+    this.validator[fieldName].state = value;
+    this.validator[fieldName].valid = true;
+    this.validator[fieldName].rules.forEach((rule) => {
+        if (!rule.test(value)) {
+          console.log(rule.message);
+          this.validator[fieldName].errors.push(rule.message);
+          this.validator[fieldName].valid = false;
+        }
+      }
+    );
+
+    let status = true;
+    Object.keys(this.validator).forEach((field) => {
+      if (!this.validator[field].valid) {
+        status = false;
+      }
+    });
+
+    this.displayValidationErrors(fieldName);
+
+    const submitButton = document.getElementById('submit') as HTMLButtonElement;
+    if (submitButton) {
+      submitButton.disabled = status ? false : true;
+    }
+  }
+
+  displayValidationErrors = (fieldName: string) => {
+    const v = this.validator[fieldName];
+    const result = '';
+    if (!v.valid) {
+      const errors = v.errors.map((info, index) => {
+        return (
+          <div key={index} className="error_div">
+            <span className="error"> {info}</span>
+            <br />
+          </ div>
+        );
+      });
+      return errors;
+    }
+    return result;
+  }
 
   showPassword(e: React.MouseEvent) {
     e.preventDefault();
@@ -154,8 +141,6 @@ export default class SignUpForm extends React.PureComponent<{}, SignUpFormState>
     
   }
 
-  
-
   render() {
     // const { handleSubmit } = this.props;
     const { showPassword } = this.state;
@@ -169,16 +154,16 @@ export default class SignUpForm extends React.PureComponent<{}, SignUpFormState>
               <AccountOutlineIcon />
             </div>
             <input
-              id="fname"
-              type="text"
-              ref="fname"
-              name="fname"
-              placeholder="First name"
-            //   ref={this.fnameInput}
-            //   onChange={event => this.handleInputChange(event, 'fname')} 
+              id = "fname"
+              type = "text"
+              name = "fname"
+              placeholder = "First name"
+              onChange={event => this.handleInputChange(event, 'fname')} 
             />
           </div>
-          {/* {this.displayValidationErrors('fname')} */}
+          <div className="error_div_container">
+           {this.displayValidationErrors('fname')}
+          </div>
         </div>
         <div className="form_form-group">
           <span className="form_form-group-label">Last name</span>
@@ -189,15 +174,14 @@ export default class SignUpForm extends React.PureComponent<{}, SignUpFormState>
             <input
               id="lname"
               type="text"
-              ref="lname"
               name="lname"
               placeholder="Last name"             
-            //   ref={this.lnameInput}
-            //   onChange={event => this.handleInputChange(event, 'lname')}
+              onChange={event => this.handleInputChange(event, 'lname')}
             /> 
           </div>
-          {/* {this.displayValidationErrors('lname')} */}
-        </div>
+          <div className="error_div_container">
+           {this.displayValidationErrors('lname')}
+          </div>        </div>
         <div className="form_form-group">
           <span className="form_form-group-label">E-mail</span>
           <div className="form_form-group-field">
@@ -210,12 +194,12 @@ export default class SignUpForm extends React.PureComponent<{}, SignUpFormState>
               ref="email"
               name="email"
               placeholder="example@mail.com"
-            //   ref={this.emailInput}
-            //   onChange={event => this.handleInputChange(event, 'email')}
+              onChange={event => this.handleInputChange(event, 'email')}
             />
           </div>
-          {/* {this.displayValidationErrors('email')} */}
-        </div>
+          <div className="error_div_container">
+           {this.displayValidationErrors('email')}
+          </div>        </div>
         <div className="form_form-group form_form-group--forgot">
           <span className="form_form-group-label">Password</span>
           <div className="form_form-group-field">
@@ -228,8 +212,7 @@ export default class SignUpForm extends React.PureComponent<{}, SignUpFormState>
               name="password"
               type={this.state.showPassword ? 'text' : 'password'}
               placeholder="Password"
-            //   ref={this.passwordInput}
-            //   onChange={event => this.handleInputChange(event, 'password')}
+              onChange={event => this.handleInputChange(event, 'password')}
             />
             <button
               type="button"
@@ -238,10 +221,11 @@ export default class SignUpForm extends React.PureComponent<{}, SignUpFormState>
             ><EyeIcon />
             </button>
           </div>
-          {/* {this.displayValidationErrors('password')} */}
-        </div>
+          <div className="error_div_container">
+           {this.displayValidationErrors('password')}
+          </div>        </div>
         <div className="account_btns">
-          <button id="submit" className="btn btn-primary account_btn" onClick={e => this.addUser(e)}>Sign Up</button>
+          <button id="submit"  className="btn btn-primary account_btn" onClick={e => this.addUser(e)}>Sign Up</button>
         </div>
       </form>
     );

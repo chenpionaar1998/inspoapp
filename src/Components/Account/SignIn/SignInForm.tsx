@@ -1,9 +1,13 @@
+// Libraries
 import React, { PureComponent } from "react";
-import { Field } from "redux-form";
+import { Link } from "react-router-dom";
+
+// Icons
 import EyeIcon from "mdi-react/EyeIcon";
 import KeyVariantIcon from "mdi-react/KeyVariantIcon";
 import AccountOutlineIcon from "mdi-react/AccountOutlineIcon";
-import { Link, Redirect } from "react-router-dom";
+
+// Components
 // import { AuthConsumer, AuthContext } from "../../../App/AuthContext";
 
 type SignInFormState = {
@@ -72,7 +76,6 @@ export default class SignInForm extends PureComponent<{}, SignInFormState> {
 						</div>
 						<input
 							name="username"
-							// component="input"
 							ref="email"
 							type="text"
 							placeholder="Name"
@@ -87,7 +90,6 @@ export default class SignInForm extends PureComponent<{}, SignInFormState> {
 						</div>
 						<input
 							name="password"
-							// component="input"
 							ref="password"
 							type={showPassword ? "text" : "password"}
 							placeholder="Password"

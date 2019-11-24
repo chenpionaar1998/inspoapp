@@ -232,6 +232,22 @@
       }
     }
   }
+
+  .error {
+    color: red !important;
+    opacity: 0.6;
+  }
+
+  .error_div_container {
+    height: 10px;
+    max-height: 10px;
+    margin-top: 4px;
+  }
+
+  .error_div {
+    height: inherit;
+    max-height: inherit;
+  }
   
   @media screen and (max-width: 520px) {
   

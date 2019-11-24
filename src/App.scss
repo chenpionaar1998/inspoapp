@@ -1,0 +1,49 @@
+@import './Scss/variables.scss';  //themes' colors
+
+//vendor...
+// @import './Scss/vendor.scss';
+
+//base...
+@import './Scss/generic/box-sizing.scss';
+@import './Scss/generic/normalize.scss';
+@import './Scss/base/scaffolding.scss';         // styles of base elements
+@import './Scss/base/typography.scss';          // base styles of h1-h6, p, span
+
+//components...
+@import './Scss/btn.scss';                    // Button from 'reactstrap'
+// @import './component/calendar';               // components/Calendar.js  ('react-big-calendar')
+@import './Scss/card.scss';                   // Card, CardBody from 'reactstrap'
+// @import 'component/board';           // components/catalog/BoardItems.js
+// @import './component/collapse';               // components/Collapse.js ('reactstrap')
+// @import './component/date-picker';            // components/form/*Date*Picker.js ('react-datepicker')
+// @import './component/dropdown';               //
+@import './Scss/form.scss';                   // <form> and all types of inputs
+// @import './component/gallery';                // components/Gallery.js
+// @import './component/list';
+// @import './component/material-form';          // for 'material-ui'
+// @import './component/modal';                  // components/Modal.js ('reactstrap')
+// @import './component/product-gallery';        // components/catalog/ProductGallery.js
+// @import './component/project-member';         // components/ProjectMember.js
+// @import './component/react-select';
+// @import './component/scroll';
+// @import './component/select-options';         // <select> and <option>
+// @import './component/sidebar';                // components/sidebar/*
+// @import './component/slider';                 // components/range_slider/* ('rc-slider')
+// @import './component/tabs';                   // Nav, NavItem, NavLink, TabContent, TabPane from 'reactstrap'
+// @import './component/text-editor';            // components/text-editor/TextEditor.js ('react-draft-wysiwyg')
+// @import './component/time-picker';            // components/form/TimePicker.js ('react-times')
+// @import './component/timeline';               // components/TimeLineItem.js
+// @import './component/todo';                   // components/ToDo.js
+// @import './component/toggle-btn';             // components/form/ToggleButton.js
+// @import './component/tooltip';                // Tooltip from 'reactstrap'
+// @import './component/topbar';                 // components/topbar/*
+// @import './component/load';
+// @import './component/dropzone';
+
+//pages...
+@import './Components/Account/account.scss';              // pages/account/* (except profile)
+// @import 'containers/profile';              // pages/account/profile/*
+
+//objects...
+@import './Scss//objects/layout.scss';        // layout settings
+

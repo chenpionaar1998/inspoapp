@@ -20,9 +20,12 @@ app.post("/api/insertUser", async (req, res): Promise<void> => {
     createUser(req.body);
 })
 
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(path.join(__dirname, '../client/build'), 'index.html'))
-// })
+if (process.env.NODE_ENV === 'production') {
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(path.join(__dirname, '../client/build'), 'index.html'))
+    })
+}
+
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);

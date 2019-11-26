@@ -6,14 +6,13 @@
       "dom.iterable",
       "esnext"
     ],
-    "baseUrl": "./",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -21,6 +20,6 @@
     "jsx": "react"
   },
   "include": [
-    "client/src", "src/server/Database"
+    "src"
   ]
 }

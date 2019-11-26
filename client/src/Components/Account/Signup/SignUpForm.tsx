@@ -13,13 +13,19 @@ import validator, {validatorType} from './validator';
 // Styles
 import '../../../Scss/form.scss';
 
+// Utils
+import { createUser } from './utils';
+
 type SignUpFormState = {
-    formInput: formInputType;
-    showPassword: boolean;
-    USERINSERTED: boolean;
+  email: string;
+  password: string;
+  fname: string;
+  lname: string;
+  showPassword: boolean;
+  USERINSERTED: boolean;
 }
 
-type formInputType = {
+export type SignUpFormType = {
   email: string;
   password: string;
   fname: string;
@@ -28,13 +34,12 @@ type formInputType = {
 
 export default class SignUpForm extends React.Component<{}, SignUpFormState> {
   state = {
-      formInput: 
-        { email: '',
-        password: '',
-        fname: '',
-        lname: '' },
-      showPassword: false,
-      USERINSERTED: false
+    email: '',
+    password: '',
+    fname: '',
+    lname: '',
+    showPassword: false,
+    USERINSERTED: false
   };
 
   validator: validatorType = validator;
@@ -59,8 +64,9 @@ export default class SignUpForm extends React.Component<{}, SignUpFormState> {
   }
 
   handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, inputPropName: string) => {
-    const newState = Object.assign({}, this.state);
-    this.setState(newState);
+    this.setState<never>( {
+      [inputPropName] : event.target.value
+    });
 
     this.updateValidators(inputPropName, event.target.value);
   }
@@ -71,7 +77,6 @@ export default class SignUpForm extends React.Component<{}, SignUpFormState> {
     this.validator[fieldName].valid = true;
     this.validator[fieldName].rules.forEach((rule) => {
         if (!rule.test(value)) {
-          console.log(rule.message);
           this.validator[fieldName].errors.push(rule.message);
           this.validator[fieldName].valid = false;
         }
@@ -115,34 +120,20 @@ export default class SignUpForm extends React.Component<{}, SignUpFormState> {
     this.setState((prevState: SignUpFormState) => ({ showPassword: !prevState.showPassword }));
   }
 
-  addUser = (e: React.MouseEvent) => {
-    // e.preventDefault();
-    // let formData = {
-    //   fname: this.fnameInput.current.value,
-    //   lname: this.lnameInput.current.value,
-    //   email: this.emailInput.current.value,
-    //   password: this.passwordInput.current.value,
-    // }
-    // fetch('/api/insertUser', {
-    //   method: "POST",
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData)
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   this.setState({ USERINSERTED: data.USERINSERTED });
-    //   if (this.state.USERINSERTED) {
-    //     document.location.href = "/";
-    //   } 
-    //   else {
-    //     window.alert("ERROR: user already exist");
-    //   }
-    // });
-    
+  addUser = (e: React.MouseEvent | React.KeyboardEvent) => {
+    e.preventDefault();
+
+    let formData: SignUpFormType = {
+      fname: this.state.fname,
+      lname: this.state.lname,
+      email: this.state.email,
+      password: this.state.password,
+    }
+
+    createUser(formData);
   }
 
   render() {
-    // const { handleSubmit } = this.props;
     const { showPassword } = this.state;
 
     return (
@@ -158,6 +149,7 @@ export default class SignUpForm extends React.Component<{}, SignUpFormState> {
               type = "text"
               name = "fname"
               placeholder = "First name"
+              value = {this.state.fname}
               onChange={event => this.handleInputChange(event, 'fname')} 
             />
           </div>
@@ -175,13 +167,15 @@ export default class SignUpForm extends React.Component<{}, SignUpFormState> {
               id="lname"
               type="text"
               name="lname"
-              placeholder="Last name"             
+              placeholder="Last name"  
+              value = {this.state.lname}           
               onChange={event => this.handleInputChange(event, 'lname')}
             /> 
           </div>
           <div className="error_div_container">
            {this.displayValidationErrors('lname')}
-          </div>        </div>
+          </div>        
+        </div>
         <div className="form_form-group">
           <span className="form_form-group-label">E-mail</span>
           <div className="form_form-group-field">
@@ -194,12 +188,14 @@ export default class SignUpForm extends React.Component<{}, SignUpFormState> {
               ref="email"
               name="email"
               placeholder="example@mail.com"
+              value = {this.state.email}
               onChange={event => this.handleInputChange(event, 'email')}
             />
           </div>
           <div className="error_div_container">
            {this.displayValidationErrors('email')}
-          </div>        </div>
+          </div>        
+        </div>
         <div className="form_form-group form_form-group--forgot">
           <span className="form_form-group-label">Password</span>
           <div className="form_form-group-field">
@@ -212,6 +208,7 @@ export default class SignUpForm extends React.Component<{}, SignUpFormState> {
               name="password"
               type={this.state.showPassword ? 'text' : 'password'}
               placeholder="Password"
+              value = {this.state.password}
               onChange={event => this.handleInputChange(event, 'password')}
             />
             <button
@@ -223,7 +220,8 @@ export default class SignUpForm extends React.Component<{}, SignUpFormState> {
           </div>
           <div className="error_div_container">
            {this.displayValidationErrors('password')}
-          </div>        </div>
+          </div>        
+        </div>
         <div className="account_btns">
           <button id="submit"  className="btn btn-primary account_btn" onClick={e => this.addUser(e)}>Sign Up</button>
         </div>

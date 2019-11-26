@@ -6,12 +6,12 @@ import path from "path";
 
 // Api
 import { createUser } from './server/database/api/createUser';
-import pool from './server/database/database';
 
 dotenv.config();
 const app = express();
 
 const port = process.env.PORT || 5000;
+const dev = app.get('env');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -20,9 +20,13 @@ app.post("/api/insertUser", async (req, res): Promise<void> => {
     createUser(req.body);
 })
 
-if (process.env.NODE_ENV === 'production') {
+if (dev === "production") {
+    app.disable("x-powered-by");
+
+    app.use(express.static(path.resolve(__dirname, './client/build')));
+
     app.get('*', (req, res) => {
-        res.sendFile(path.join(path.join(__dirname, '../client/build'), 'index.html'))
+        res.sendFile(path.resolve(__dirname,'./client/build', 'index.html'));
     })
 }
 

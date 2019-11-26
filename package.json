@@ -17,7 +17,7 @@
         "typescript": "^3.7.2"
     },
     "scripts": {
-        "start": "ts-node  --experimental-modules server.ts",
+        "start": "ts-node server.ts",
         "server": "ts-node server.ts",
         "client": "npm start --prefix client",
         "dev": "concurrently \"npm run server\" \"npm run client\""

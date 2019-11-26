@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.post("/api/insertUser", async (req, res): Promise<void> => {
     createUser(req.body);
-})
+});
 
 if (dev === "production") {
     app.disable("x-powered-by");
@@ -33,4 +33,4 @@ if (dev === "production") {
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
-})
+});

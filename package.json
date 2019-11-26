@@ -17,8 +17,8 @@
         "typescript": "^3.7.2"
     },
     "scripts": {
-        "start": "node --experimental-modules server.ts",
-        "server": "nodemon  server.ts",
+        "start": "ts-node  --experimental-modules server.ts",
+        "server": "ts-node server.ts",
         "client": "npm start --prefix client",
         "dev": "concurrently \"npm run server\" \"npm run client\""
     },

@@ -5,18 +5,26 @@ import { SignUpFormType } from '../../../client/src/Components/Account/Signup/Si
 import pool from '../database';
 
 // Util
-// import { findUser } from './findUser';
+import { findUser } from './findUser';
+import { hashPassword } from '../../utils/hash';
 
-export async function createUser(formData: SignUpFormType): Promise<void> {
-    return pool.query('INSERT INTO users VALUES ($1, $2, $3, $4);', [formData.email, formData.password, formData.fname, formData.lname], 
-    function (err, res) {
-        if (err){
-            console.log("THIS IS AN ERROR");
-            console.log(err);
+export async function createUser(formData: SignUpFormType): Promise<boolean> {
+    // User not found, create the user
+    const  foundUser = await findUser(formData.email);
+
+    formData.password = hashPassword(formData.password);
+
+    if (!foundUser){
+        const result = await pool.query('INSERT INTO users VALUES ($1, $2, $3, $4);', 
+        [formData.email, formData.password, formData.fname, formData.lname]).catch(err => {
+            console.log("Create User Error: ", err);
+            return false;
+        });
+        if(result){
+            return true;
         }
-        else {
-            console.log(res);
-            console.log("success");
-        }
-    });
+    }
+    // User already exists, send error indicating user exist
+    return false;
+    
 }

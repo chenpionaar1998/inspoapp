@@ -16,10 +16,6 @@ const dev = app.get('env');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.post("/api/insertUser", async (req, res): Promise<void> => {
-    createUser(req.body);
-});
-
 if (dev === "production") {
     app.disable("x-powered-by");
 
@@ -29,6 +25,14 @@ if (dev === "production") {
         res.sendFile(path.resolve(__dirname,'./client/build', 'index.html'));
     })
 }
+
+app.post("/api/insertUser", async (req, res): Promise<void> => {
+    const result = createUser(req.body);
+    result.then(ress => {
+        res.send({ createUser: ress });
+    })
+});
+
 
 
 app.listen(port, () => {

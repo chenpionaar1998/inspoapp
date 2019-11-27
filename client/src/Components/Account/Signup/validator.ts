@@ -4,9 +4,9 @@ const validator: validatorType= {
         rules: [
             {
                 test: (value: string) => {
-                    return value.length > 0;
+                    return value.length > 0 && value.includes('@');
                 },
-                message: 'Email cannot be empty'
+                message: 'Invalid email input'
             }
         ],
         errors: [],

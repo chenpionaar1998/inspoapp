@@ -13,8 +13,8 @@ import validator, {validatorType} from './validator';
 // Styles
 import '../../../Scss/form.scss';
 
-// Utils
-import { createUser } from './utils';
+// Types 
+import { SignUpUserAction } from '../duck/Types';
 
 type SignUpFormState = {
   email: string;
@@ -22,7 +22,11 @@ type SignUpFormState = {
   fname: string;
   lname: string;
   showPassword: boolean;
-  USERINSERTED: boolean;
+  shouldShowCreateError: boolean;
+}
+
+type SignUpFormProps = {
+  createUser: (formData: SignUpFormType) => SignUpUserAction;
 }
 
 export type SignUpFormType = {
@@ -32,14 +36,14 @@ export type SignUpFormType = {
   lname: string;
 }
 
-export default class SignUpForm extends React.Component<{}, SignUpFormState> {
+export default class SignUpForm extends React.Component<SignUpFormProps, SignUpFormState> {
   state = {
     email: '',
     password: '',
     fname: '',
     lname: '',
     showPassword: false,
-    USERINSERTED: false
+    shouldShowCreateError: false
   };
 
   validator: validatorType = validator;
@@ -130,7 +134,7 @@ export default class SignUpForm extends React.Component<{}, SignUpFormState> {
       password: this.state.password,
     }
 
-    createUser(formData);
+    this.props.createUser(formData);
   }
 
   render() {

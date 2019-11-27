@@ -3,12 +3,19 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
+// Types
+import { AccountState } from '../src/Components/Account/duck/Types';
+
 // Reducers
-import {AccountReducer} from './Components/Account/duck/Reducer';
+import Account from './Components/Account/duck/Reducer';
 
 const rootReducer = combineReducers({
-    AccountReducer
+    Account
 });
+
+export type AppState = {
+    Account: AccountState
+}
 
 export default function configureStore() {
     return createStore (

@@ -21,7 +21,8 @@ type SignInFormState = {
 }
 
 type SignInFormProps = {
-	userName: string;
+	history: any;
+	signedIn: boolean;
 	signInUser:  (formData: SignInFormType) => SignInUserAction;
 }
 
@@ -38,8 +39,13 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
         userlogin: false,
     }
 
+	componentDidUpdate(prevProps: SignInFormProps) {
+		if (this.props.signedIn && this.props.signedIn !== prevProps.signedIn) {
+			this.props.history.push('/dashboard_default');
+		}
+	}
 
-	checkUser(e: React.MouseEvent) {
+	checkUser = (e: React.MouseEvent) => {
 		//fetch the data from loginUser
 		e.preventDefault();
 
@@ -48,13 +54,12 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
 			password: this.state.password
 		};
 
-		console.log('Signing in');
  		this.props.signInUser(formData);
 	}
 
 	handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, inputPropName: string) => {
 		this.setState<never>( {
-		  [inputPropName] : event.target.value
+			[inputPropName] : event.target.value
 		});
 	}
 
@@ -110,8 +115,8 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
 				<div className="account_btns">
 					<Link
 						className="btn btn-primary account_btn"
-						to={`/dashboard_default/${this.props.userName}`}
-						onClick={this.checkUser}
+						to={`/dashboard_default`}
+ 						onClick={this.checkUser}
 					>
 						Sign In
 					</Link>

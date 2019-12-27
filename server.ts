@@ -31,7 +31,21 @@ if (dev === "production") {
 app.post("/api/createUser", async (req, res): Promise<void> => {
     const result = createUser(req.body);
     result.then(ress => {
-        res.send({ createUser: ress });
+        if (ress) {
+            const user = getUser(req.body.email);
+            user.then(user => {
+                res.send({ 
+                    correctUser: true,
+                    user: user 
+                });
+            })
+        }
+        else {
+            res.send({ 
+                correctUser: false,
+                user: {}
+            });
+        }
     })
 });
 
@@ -41,8 +55,17 @@ app.post("/api/signInUser", async (req, res): Promise<void> => {
         if (ress) {
             const user = getUser(req.body.email);
             user.then(user => {
-                res.send({ user: user });
+                res.send({ 
+                    correctUser: true,
+                    user: user 
+                });
             })
+        }
+        else {
+            res.send({ 
+                correctUser: false,
+                user: {}
+            });
         }
     })
 });

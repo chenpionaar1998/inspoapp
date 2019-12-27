@@ -11,19 +11,18 @@ import AccountOutlineIcon from "mdi-react/AccountOutlineIcon";
 // import { AuthConsumer, AuthContext } from "../../../App/AuthContext";
 
 // Types 
-import { SignInUserAction } from '../duck/Types';
+import { UpdateUserInfoAction } from '../duck/Types';
 
 type SignInFormState = {
 	email: string,
 	password: string,
     showPassword: boolean,
-    userlogin: boolean,
 }
 
 type SignInFormProps = {
 	history: any;
 	signedIn: boolean;
-	signInUser:  (formData: SignInFormType) => SignInUserAction;
+	signInUser:  (formData: SignInFormType) => UpdateUserInfoAction;
 }
 
 export type SignInFormType = {
@@ -35,8 +34,7 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
     state = {
 		email: "",
  		password: "",
-        showPassword: false,
-        userlogin: false,
+        showPassword: false
     }
 
 	componentDidUpdate(prevProps: SignInFormProps) {
@@ -54,7 +52,7 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
 			password: this.state.password
 		};
 
- 		this.props.signInUser(formData);
+		this.props.signInUser(formData);
 	}
 
 	handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, inputPropName: string) => {
@@ -63,7 +61,7 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
 		});
 	}
 
-	showPassword(e: React.MouseEvent) {
+	showPassword = (e: React.MouseEvent) => {
 		e.preventDefault();
 		this.setState(prevState => ({ showPassword: !prevState.showPassword }));
 	}
@@ -106,7 +104,7 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
 							className={`form_form-group-button${
 								showPassword ? " active" : ""
 							}`}
-							onClick={e => this.showPassword(e)}
+							onClick={this.showPassword}
 						>
 							<EyeIcon />
 						</button>

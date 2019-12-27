@@ -5,18 +5,15 @@ import { batch } from "react-redux";
 // Types
 import { AccountInfoType } from "../Signup/SignUpForm";
 import { SignInFormType } from "../SignIn/SignInForm";
-import  { ISignUpUserAction,
-        SIGN_UP_USER_ACTION, 
-        SIGN_IN_USER_ACTION, 
+import {UPDATE_USER_INFO_ACTION, 
         UPDATE_ACCOUNT_SIGNED_IN_ACTION,
-        SignUpUserAction, 
-        ISignInUserAction, 
-        SignInUserAction,
-        IUpdateAccountSignedInAction
+        IUpdateUserInfoAction,
+        IUpdateAccountSignedInAction,
+        UpdateUserInfoAction
 } from './Types';
 
-export function createUser (formData: AccountInfoType): SignUpUserAction {
-    return (dispatch: Dispatch<ISignUpUserAction>) => {
+export function createUser (formData: AccountInfoType): UpdateUserInfoAction {
+    return (dispatch: Dispatch) => {
         fetch('/api/createUser', {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
@@ -24,17 +21,21 @@ export function createUser (formData: AccountInfoType): SignUpUserAction {
           })
           .then(response => response.json())
           .then(result => {
-            if (result.createUser) {
-                return dispatch(updateAccountWithSignUp(formData));
+            if (result.correctUser) {
+                return batch(() => {
+                    dispatch(updateAccount(result.user));
+                    dispatch(updateAccountSignedIn(true));
+                });                 
             }
             else {
-                // dispatch error state
+                dispatch(updateAccountSignedIn(false));
+                window.alert("The username is already taken");
             }
           });
     }
 }
 
-export function signInUser (formData: SignInFormType): SignInUserAction {
+export function signInUser (formData: SignInFormType): UpdateUserInfoAction {
     return (dispatch: Dispatch) => {
         fetch('/api/signInUser', {
             method: "POST",
@@ -43,30 +44,23 @@ export function signInUser (formData: SignInFormType): SignInUserAction {
         })
         .then(response => response.json())
         .then(result => {
-            if (result.user) {
+            if (result.correctUser) {
                 return batch(() => {
-                    dispatch(updateAccountWithSignIn(result.user));
+                    dispatch(updateAccount(result.user));
                     dispatch(updateAccountSignedIn(true));
-                });            }
+                });
+            }
             else {
-                // dispatch error state
+                dispatch(updateAccountSignedIn(false));
+				window.alert("The username or password you entered is incorrect");
             }
         })
     }
 }
 
-function updateAccountWithSignUp (formData: AccountInfoType): ISignUpUserAction {
+function updateAccount (formData: AccountInfoType): IUpdateUserInfoAction {
     return {
-        type: SIGN_UP_USER_ACTION,
-        userName: formData.email,
-        fname: formData.fname,
-        lname: formData.lname
-    }
-}
-
-function updateAccountWithSignIn (formData: AccountInfoType): ISignInUserAction {
-    return {
-        type: SIGN_IN_USER_ACTION,
+        type: UPDATE_USER_INFO_ACTION,
         userName: formData.email,
         fname: formData.fname,
         lname: formData.lname

@@ -19,7 +19,7 @@ export default class AppRouter extends React.PureComponent<RouterProp> {
                         <SignIn history={this.props.history}/>
                     </Route>
                     <Route exact path="/signup">
-                        <SignUp/>
+                        <SignUp history={this.props.history}/>
                     </Route>
                     <Route path="/signin">
                         <SignIn history={this.props.history}/>

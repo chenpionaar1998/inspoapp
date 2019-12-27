@@ -14,7 +14,7 @@ import validator, {validatorType} from './validator';
 import '../../../Scss/form.scss';
 
 // Types 
-import { SignUpUserAction } from '../duck/Types';
+import { UpdateUserInfoAction } from '../duck/Types';
 
 type SignUpFormState = {
   email: string;
@@ -26,7 +26,9 @@ type SignUpFormState = {
 }
 
 type SignUpFormProps = {
-  createUser: (formData: AccountInfoType) => SignUpUserAction;
+  signedIn: boolean;
+  history: any;
+  createUser: (formData: AccountInfoType) => UpdateUserInfoAction;
 }
 
 export type AccountInfoType = {
@@ -58,6 +60,12 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
     // Initialize validator
     this.resetValidator();
   }
+
+  componentDidUpdate(prevProps: SignUpFormProps) {
+		if (this.props.signedIn && this.props.signedIn !== prevProps.signedIn) {
+			this.props.history.push('/dashboard_default');
+		}
+	}
 
   resetValidator = () => {
     for (let key of Object.entries(validator)) {

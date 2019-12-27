@@ -1,7 +1,7 @@
-import { SignUpFormType } from "../Signup/SignUpForm";
+// Libraries
 import { Dispatch } from "redux";
 
-export const LOGIN_USER_ACTION = "@@USER/LOGIN_USER_ACTION";
+export const SIGN_IN_USER_ACTION = "@@USER/SIGN_IN_USER_ACTION";
 export const SIGN_UP_USER_ACTION = "@@USER/SIGN_UP_USER_ACTION";
 
 export interface AccountState {
@@ -10,8 +10,8 @@ export interface AccountState {
     lname: string;
 } 
 
-export interface ILoginUserAction {
-    type: typeof LOGIN_USER_ACTION,
+export interface ISignInUserAction {
+    type: typeof SIGN_IN_USER_ACTION,
     account: AccountState
 }
 
@@ -20,6 +20,8 @@ export interface ISignUpUserAction {
     account: AccountState
 }
 
+export type SignInUserAction = (dispatch: Dispatch) => Promise<ISignInUserAction> | void;
+
 export type SignUpUserAction = (dispatch: Dispatch) => Promise<ISignUpUserAction> | void;
 
-export type AccountAction = ILoginUserAction | ISignUpUserAction;
+export type AccountAction = ISignInUserAction | ISignUpUserAction;

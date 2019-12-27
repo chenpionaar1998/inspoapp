@@ -1,5 +1,5 @@
 // Types
-import { SignUpFormType } from '../../../client/src/Components/Account/Signup/SignUpForm';
+import { AccountInfoType } from '../../../client/src/Components/Account/Signup/SignUpForm';
 
 // DB
 import pool from '../database';
@@ -8,7 +8,7 @@ import pool from '../database';
 import { findUser } from './findUser';
 import { hashPassword } from '../../utils/hash';
 
-export async function createUser(formData: SignUpFormType): Promise<boolean> {
+export async function createUser(formData: AccountInfoType): Promise<boolean> {
     // User not found, create the user
     const  foundUser = await findUser(formData.email);
 

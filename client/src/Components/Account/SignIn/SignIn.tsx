@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Components
-import SignInForm from './SignInForm';
+import ConnectedSignInForm from './ConnectedSignInForm';
 
 export default class SignIn extends React.PureComponent {
     render() {
@@ -10,7 +10,7 @@ export default class SignIn extends React.PureComponent {
             <div className="account">
                 <div className="account_wrapper">
                     <div className="account_card">
-                        <SignInForm />
+                        <ConnectedSignInForm />
                     </div>
                 </div>
             </div>

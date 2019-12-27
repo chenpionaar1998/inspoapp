@@ -26,10 +26,10 @@ type SignUpFormState = {
 }
 
 type SignUpFormProps = {
-  createUser: (formData: SignUpFormType) => SignUpUserAction;
+  createUser: (formData: AccountInfoType) => SignUpUserAction;
 }
 
-export type SignUpFormType = {
+export type AccountInfoType = {
   email: string;
   password: string;
   fname: string;
@@ -127,7 +127,7 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
   addUser = (e: React.MouseEvent | React.KeyboardEvent) => {
     e.preventDefault();
 
-    let formData: SignUpFormType = {
+    let formData: AccountInfoType = {
       fname: this.state.fname,
       lname: this.state.lname,
       email: this.state.email,

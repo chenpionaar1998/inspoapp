@@ -10,53 +10,53 @@ import AccountOutlineIcon from "mdi-react/AccountOutlineIcon";
 // Components
 // import { AuthConsumer, AuthContext } from "../../../App/AuthContext";
 
+// Types 
+import { SignInUserAction } from '../duck/Types';
+
 type SignInFormState = {
+	email: string,
+	password: string,
     showPassword: boolean,
     userlogin: boolean,
-    userLoggedin: string
 }
 
-export default class SignInForm extends PureComponent<{}, SignInFormState> {
+type SignInFormProps = {
+	userName: string;
+	signInUser:  (formData: SignInFormType) => SignInUserAction;
+}
+
+export type SignInFormType = {
+	email: string,
+	password: string
+}
+
+export default class SignInForm extends PureComponent<SignInFormProps, SignInFormState> {
     state = {
+		email: "",
+ 		password: "",
         showPassword: false,
         userlogin: false,
-        userLoggedin: ""
     }
 
 
-	// checkUser(event) {
-	// 	//fetch the data from loginUser
-	// 	event.preventDefault();
+	checkUser(e: React.MouseEvent) {
+		//fetch the data from loginUser
+		e.preventDefault();
 
-	// 	let data = {
-	// 		email: this.refs.email.value,
-	// 		password: this.refs.password.value
-	// 	};
+		let formData: SignInFormType = {
+			email: this.state.email,
+			password: this.state.password
+		};
 
-	// 	if (data.email == null || data.password == null) {
-	// 		window.alert("Please log in with your email/password.");
-	// 	} else {
-	// 		fetch("/api/loginUser", {
-	// 			method: "POST",
-	// 			headers: { "Content-Type": "application/json" },
-	// 			body: JSON.stringify(data)
-	// 		})
-	// 			.then(response => response.json())
-	// 			.then(resdata => {
-	// 				this.setState({ userlogin: resdata.userLoggedin });
+		console.log('Signing in');
+ 		this.props.signInUser(formData);
+	}
 
-	// 				if (this.state.userlogin) {
-	// 					localStorage.setItem("authToken", resdata.authToken);
-	// 					this.props.login(data.email, data.password)
-	// 					this.setState({userLoggedin: data.email});
-	// 					// document.location.href = `/dashboard_default?email=${data.email}`;
-						
-	// 				} else {
-	// 					window.alert("ERROR: WRONG PASSWORD/EMAIL");
-	// 				}
-	// 			});
-	// 	}
-	// }
+	handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, inputPropName: string) => {
+		this.setState<never>( {
+		  [inputPropName] : event.target.value
+		});
+	}
 
 	showPassword(e: React.MouseEvent) {
 		e.preventDefault();
@@ -76,9 +76,10 @@ export default class SignInForm extends PureComponent<{}, SignInFormState> {
 						</div>
 						<input
 							name="username"
-							ref="email"
 							type="text"
-							placeholder="Name"
+							placeholder="Username"
+ 							value={this.state.email}
+ 							onChange={event => this.handleInputChange(event, "email")}
 						/>
 					</div>
 				</div>
@@ -90,9 +91,10 @@ export default class SignInForm extends PureComponent<{}, SignInFormState> {
 						</div>
 						<input
 							name="password"
-							ref="password"
 							type={showPassword ? "text" : "password"}
 							placeholder="Password"
+							value={this.state.password}
+ 							onChange={event => this.handleInputChange(event, "password")}
 						/>
 						<button
 							type="button"
@@ -108,8 +110,8 @@ export default class SignInForm extends PureComponent<{}, SignInFormState> {
 				<div className="account_btns">
 					<Link
 						className="btn btn-primary account_btn"
-						to={`/dashboard_default/${this.state.userLoggedin}`}
-						// onClick={this.checkUser.bind(this)}
+						to={`/dashboard_default/${this.props.userName}`}
+						onClick={this.checkUser}
 					>
 						Sign In
 					</Link>

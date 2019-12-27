@@ -5,15 +5,8 @@ import { connect } from "react-redux";
 import { createUser } from '../duck/Actions';
 import SignUpForm from "./SignUpForm";
 
-// Types
-import { AppState } from '../../../RootReducer'
-
-const mapStateToProps = (state: AppState) => {
-
-}
-
 const ConnectedSignUpForm = connect(
-    mapStateToProps,
+    null,
     {
         createUser: createUser
     }

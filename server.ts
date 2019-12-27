@@ -6,6 +6,8 @@ import path from "path";
 
 // Api
 import { createUser } from './server/database/api/createUser';
+import { loginUser } from './server/database/api/signInUser';
+ import { getUser } from './server/database/api/findUser';
 
 dotenv.config();
 const app = express();
@@ -26,14 +28,24 @@ if (dev === "production") {
     })
 }
 
-app.post("/api/insertUser", async (req, res): Promise<void> => {
+app.post("/api/createUser", async (req, res): Promise<void> => {
     const result = createUser(req.body);
     result.then(ress => {
         res.send({ createUser: ress });
     })
 });
 
-
+app.post("/api/signInUser", async (req, res): Promise<void> => {
+    const result = loginUser(req.body);
+    result.then(ress => {
+        if (ress) {
+            const user = getUser(req.body.email);
+            user.then(user => {
+                res.send({ user: user });
+            })
+        }
+    })
+});
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);

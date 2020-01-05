@@ -8,10 +8,10 @@ import pool from '../database';
 import { findUser } from './findUser';
 import { verifyPassword } from '../../utils/hash';
 
-export async function loginUser (formData: SignInFormType): Promise<boolean> {
+export async function signIn (formData: SignInFormType): Promise<boolean> {
     // Check if user exists in the db
     const foundUser = await findUser(formData.email);
-
+    
     if (foundUser) {
         const user = await pool.query("SELECT password FROM users WHERE email=$1;", [formData.email]);
 

@@ -28,7 +28,7 @@ type SignUpFormState = {
 type SignUpFormProps = {
   signedIn: boolean;
   history: any;
-  createUser: (formData: AccountInfoType) => UpdateUserInfoAction;
+  signUp: (formData: AccountInfoType) => UpdateUserInfoAction;
 }
 
 export type AccountInfoType = {
@@ -142,7 +142,7 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
       password: this.state.password,
     }
 
-    this.props.createUser(formData);
+    this.props.signUp(formData);
   }
 
   render() {

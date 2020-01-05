@@ -8,7 +8,7 @@ import pool from '../database';
 import { findUser } from './findUser';
 import { hashPassword } from '../../utils/hash';
 
-export async function createUser(formData: AccountInfoType): Promise<boolean> {
+export async function signUp(formData: AccountInfoType): Promise<boolean> {
     // User not found, create the user
     const  foundUser = await findUser(formData.email);
 

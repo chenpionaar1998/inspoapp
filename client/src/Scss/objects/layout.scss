@@ -6,7 +6,7 @@
   }
 }
 
-.container__wrap {
+.container_wrap {
   padding-left: 0;
   padding-top: 90px;
   min-height: 100vh;
@@ -25,7 +25,7 @@
 
   &.layout--collapse {
 
-    & + .container__wrap {
+    & + .container_wrap {
       padding-left: 0;
 
       @media screen and (min-width: 576px) {
@@ -36,7 +36,7 @@
 
   &.layout--top-navigation{
 
-    & + .container__wrap{
+    & + .container_wrap{
 
       @media screen and (min-width: 576px) {
         padding-left: 0;

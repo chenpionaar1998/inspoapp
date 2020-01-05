@@ -7,9 +7,6 @@ import EyeIcon from "mdi-react/EyeIcon";
 import KeyVariantIcon from "mdi-react/KeyVariantIcon";
 import AccountOutlineIcon from "mdi-react/AccountOutlineIcon";
 
-// Components
-// import { AuthConsumer, AuthContext } from "../../../App/AuthContext";
-
 // Types 
 import { UpdateUserInfoAction } from '../duck/Types';
 
@@ -22,7 +19,7 @@ type SignInFormState = {
 type SignInFormProps = {
 	history: any;
 	signedIn: boolean;
-	signInUser:  (formData: SignInFormType) => UpdateUserInfoAction;
+	signIn: (formData: SignInFormType) => UpdateUserInfoAction;
 }
 
 export type SignInFormType = {
@@ -52,7 +49,7 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
 			password: this.state.password
 		};
 
-		this.props.signInUser(formData);
+		this.props.signIn(formData);
 	}
 
 	handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, inputPropName: string) => {

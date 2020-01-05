@@ -14,7 +14,7 @@
 // @import './component/calendar';               // components/Calendar.js  ('react-big-calendar')
 @import './Scss/card.scss';                   // Card, CardBody from 'reactstrap'
 // @import 'component/board';           // components/catalog/BoardItems.js
-// @import './component/collapse';               // components/Collapse.js ('reactstrap')
+@import './Scss/collapse.scss';               // components/Collapse.js ('reactstrap')
 // @import './component/date-picker';            // components/form/*Date*Picker.js ('react-datepicker')
 // @import './component/dropdown';               //
 @import './Scss/form.scss';                   // <form> and all types of inputs
@@ -36,7 +36,7 @@
 // @import './component/todo';                   // components/ToDo.js
 // @import './component/toggle-btn';             // components/form/ToggleButton.js
 // @import './component/tooltip';                // Tooltip from 'reactstrap'
-// @import './component/topbar';                 // components/topbar/*
+@import './Scss/topbar.scss';                 // components/topbar/*
 // @import './component/load';
 // @import './component/dropzone';
 

@@ -5,11 +5,14 @@ import { AccountState,
         UPDATE_USER_INFO_ACTION
 } from './Types';
 
+// Utils
+import {isTrue} from "../../../utils/strings"
+
 const initialState: AccountState  = {
-    userName: '',
-    fname: '',
-    lname: '',
-    signedIn: false,
+    userName: localStorage.username,
+    fname: localStorage.fname,
+    lname: localStorage.lname,
+    signedIn: isTrue(localStorage.signedIn)
 }
 
 const  Account = ( state: AccountState = initialState, action: AccountAction): AccountState => {

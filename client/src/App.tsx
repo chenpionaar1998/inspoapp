@@ -1,20 +1,21 @@
 // Libraries
 import React from 'react';
 import { createBrowserHistory } from 'history';
+import 'bootstrap/dist/css/bootstrap.css';
 
 // Styles
 import './App.scss';
 
 // Components
-import Router from './Components/Router/Router';
+import ConnectedRouter from './Components/Router/ConnectedRouter';
 
 const history = createBrowserHistory();
 
 const App: React.FC = () => {
   return (
     <div className="theme-light">
-      <div className="wrapper blocks-with-shadow-theme top-navigation">
-        <Router history={history}/>
+      <div className="wrapper squared-corner-theme blocks-with-shadow-theme top-navigation">
+        <ConnectedRouter history={history}/>
       </div>
     </div>
   );

@@ -5,8 +5,8 @@ import bodyParser from "body-parser";
 import path from "path";
 
 // Api
-import { createUser } from './server/database/api/createUser';
-import { loginUser } from './server/database/api/signInUser';
+import { signUp } from './server/database/api/createUser';
+import { signIn } from './server/database/api/signInUser';
  import { getUser } from './server/database/api/findUser';
 
 dotenv.config();
@@ -28,8 +28,8 @@ if (dev === "production") {
     })
 }
 
-app.post("/api/createUser", async (req, res): Promise<void> => {
-    const result = createUser(req.body);
+app.post("/api/signUp", async (req, res): Promise<void> => {
+    const result = signUp(req.body);
     result.then(ress => {
         if (ress) {
             const user = getUser(req.body.email);
@@ -49,8 +49,8 @@ app.post("/api/createUser", async (req, res): Promise<void> => {
     })
 });
 
-app.post("/api/signInUser", async (req, res): Promise<void> => {
-    const result = loginUser(req.body);
+app.post("/api/signIn", async (req, res): Promise<void> => {
+    const result = signIn(req.body);
     result.then(ress => {
         if (ress) {
             const user = getUser(req.body.email);

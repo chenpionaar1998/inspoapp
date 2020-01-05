@@ -2,7 +2,7 @@
 import { connect } from "react-redux";
 
 // Actions
-import { signInUser } from '../duck/Actions';
+import { signIn } from '../duck/Actions';
 
 // Componenets
 import SignInForm from "./SignInForm";
@@ -22,7 +22,7 @@ const mapStateToProps = (state: AppState, ownProps: ConnectedSignInProps) => ({
 const ConnectedSignInForm = connect(
     mapStateToProps,
     {
-        signInUser: signInUser
+        signIn: signIn
     }
 )(SignInForm as any)
 

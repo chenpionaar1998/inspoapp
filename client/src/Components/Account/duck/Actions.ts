@@ -12,9 +12,9 @@ import {UPDATE_USER_INFO_ACTION,
         UpdateUserInfoAction
 } from './Types';
 
-export function createUser (formData: AccountInfoType): UpdateUserInfoAction {
+export function signUp (formData: AccountInfoType): UpdateUserInfoAction {
     return (dispatch: Dispatch) => {
-        fetch('/api/createUser', {
+        fetch('/api/signUp', {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
@@ -22,12 +22,18 @@ export function createUser (formData: AccountInfoType): UpdateUserInfoAction {
           .then(response => response.json())
           .then(result => {
             if (result.correctUser) {
+                localStorage.setItem("signedIn", JSON.stringify(true));
+                localStorage.setItem("username", formData.email);
+                localStorage.setItem("fname", formData.fname);
+                localStorage.setItem("lname", formData.lname);
+
                 return batch(() => {
                     dispatch(updateAccount(result.user));
                     dispatch(updateAccountSignedIn(true));
                 });                 
             }
             else {
+                localStorage.setItem("signedIn", JSON.stringify(false));
                 dispatch(updateAccountSignedIn(false));
                 window.alert("The username is already taken");
             }
@@ -35,9 +41,9 @@ export function createUser (formData: AccountInfoType): UpdateUserInfoAction {
     }
 }
 
-export function signInUser (formData: SignInFormType): UpdateUserInfoAction {
+export function signIn (formData: SignInFormType): UpdateUserInfoAction {
     return (dispatch: Dispatch) => {
-        fetch('/api/signInUser', {
+        fetch('/api/signIn', {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
@@ -45,15 +51,38 @@ export function signInUser (formData: SignInFormType): UpdateUserInfoAction {
         .then(response => response.json())
         .then(result => {
             if (result.correctUser) {
+                localStorage.setItem("signedIn", JSON.stringify(true));
+                localStorage.setItem("username", result.user.email);
+                localStorage.setItem("fname", result.user.fname);
+                localStorage.setItem("lname", result.user.lname);
                 return batch(() => {
                     dispatch(updateAccount(result.user));
                     dispatch(updateAccountSignedIn(true));
                 });
             }
             else {
+                localStorage.setItem("signedIn", JSON.stringify(false));
                 dispatch(updateAccountSignedIn(false));
 				window.alert("The username or password you entered is incorrect");
             }
+        })
+    }
+}
+
+export function signOut(): UpdateUserInfoAction {
+    localStorage.clear();
+
+    const emptyForm: AccountInfoType = {
+        email: "",
+        password: "",
+        fname:"",
+        lname: ""
+    }
+
+    return (dispatch: Dispatch) => {
+        return batch(() => {
+            dispatch(updateAccount(emptyForm));
+            dispatch(updateAccountSignedIn(false));
         })
     }
 }

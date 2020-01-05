@@ -8,7 +8,6 @@ import App from './App';
 import configureStore from './RootReducer';
 import * as serviceWorker from './serviceWorker';
 
-
 ReactDOM.render(
     <Provider store={configureStore()}>
         <App />

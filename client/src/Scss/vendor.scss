@@ -68,7 +68,7 @@ path.recharts-sector {
 
   .chartjs-size-monitor {
 
-    & + .card__title:not(:first-child) {
+    & + .card_title:not(:first-child) {
       margin-top: 0;
     }
   }

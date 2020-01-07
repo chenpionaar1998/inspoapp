@@ -93,7 +93,7 @@
     border: none;
     transition: all 0.3s;
     box-shadow: none;
-    padding: 0 15px;
+    padding: 0;
     background-color: transparent;
   
     &:hover, &:focus, &:active, &:focus:active {
@@ -171,8 +171,8 @@
     z-index: 101;
     position: absolute;
     width: 100%;
-    padding: 0 10px;
-    min-width: 190px;
+    padding: 0;
+    min-width: 160px;
     right: 0;
   }
   

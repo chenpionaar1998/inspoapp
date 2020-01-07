@@ -13,7 +13,7 @@
 @import './Scss/btn.scss';                    // Button from 'reactstrap'
 // @import './component/calendar';               // components/Calendar.js  ('react-big-calendar')
 @import './Scss/card.scss';                   // Card, CardBody from 'reactstrap'
-// @import 'component/board';           // components/catalog/BoardItems.js
+@import '/Scss/board.scss';           // components/catalog/BoardItems.js
 @import './Scss/collapse.scss';               // components/Collapse.js ('reactstrap')
 // @import './component/date-picker';            // components/form/*Date*Picker.js ('react-datepicker')
 // @import './component/dropdown';               //
@@ -21,7 +21,7 @@
 // @import './component/gallery';                // components/Gallery.js
 // @import './component/list';
 // @import './component/material-form';          // for 'material-ui'
-// @import './component/modal';                  // components/Modal.js ('reactstrap')
+@import './Scss/modal.scss';                  // components/Modal.js ('reactstrap')
 // @import './component/product-gallery';        // components/catalog/ProductGallery.js
 // @import './component/project-member';         // components/ProjectMember.js
 // @import './component/react-select';

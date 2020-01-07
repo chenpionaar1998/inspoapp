@@ -1,0 +1,193 @@
+.modal {
+
+}
+
+.modal-dialog {
+  max-width: 385px;
+  margin-top: 250px;
+}
+
+.modal-content {
+  border-radius: 0;
+  border: none;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding: 50px 40px 60px 40px;
+  text-align: center;
+
+  @include themify($themes) {
+    background-color: themed('colorBackground');
+    color: themed('colorText');
+  }
+}
+
+.modal_close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background: transparent;
+
+  @include themify($themes) {
+    color: themed('colorIcon');
+  }
+}
+
+.modal_title-icon {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+}
+
+.modal_title {
+  margin-top: 10px;
+  margin-bottom: 15px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.modal_footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+  width: 100%;
+
+  button {
+    min-width: 100px;
+    padding: 4px 25px;
+    margin-bottom: 0;
+  }
+}
+
+.modal-dialog--primary {
+
+  .modal_title-icon {
+    color: $color-blue;
+  }
+}
+
+.modal-dialog--success {
+
+  .modal_title-icon {
+    color: $color-accent;
+  }
+}
+
+.modal-dialog--warning {
+
+  .modal_title-icon {
+    color: $color-yellow;
+  }
+}
+
+.modal-dialog--danger {
+
+  .modal_title-icon {
+    color: $color-red;
+  }
+}
+
+.modal-dialog--colored {
+  color: white;
+
+  .modal_title-icon {
+    color: white;
+  }
+
+  .modal_close-btn {
+    color: white;
+  }
+
+  .modal_footer {
+
+    button:first-child {
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.3);
+      border-color: #ffffff;
+
+      &:before {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    button:last-child {
+      border-color: white;
+      color: white;
+    }
+  }
+
+  &.modal-dialog--primary .modal-content {
+    background-color: $color-blue;
+  }
+
+  &.modal-dialog--success .modal-content {
+    background-color: $color-accent;
+  }
+
+  &.modal-dialog--warning .modal-content {
+    background-color: $color-yellow;
+  }
+
+  &.modal-dialog--danger .modal-content {
+    background-color: $color-red;
+  }
+}
+
+.modal-dialog--header {
+  max-width: 520px;
+
+  .modal-content {
+    padding: 0;
+    text-align: left;
+  }
+
+  .modal_header {
+    color: white;
+    padding: 15px 20px;
+    position: relative;
+  }
+
+  .modal_title {
+    margin: 0;
+    font-weight: 300;
+  }
+
+  .modal_close-btn {
+    color: white;
+    top: calc(50% - 8px);
+  }
+
+  .modal_body {
+    padding: 25px 40px 20px 20px;
+  }
+
+  .modal_footer {
+    margin-bottom: 40px;
+    justify-content: flex-end;
+    padding-right: 20px;
+  }
+
+  &.modal-dialog--primary .modal_header {
+    background-color: $color-blue;
+  }
+
+  &.modal-dialog--success .modal_header {
+    background-color: $color-accent;
+  }
+
+  &.modal-dialog--warning .modal_header {
+    background-color: $color-yellow;
+  }
+
+  &.modal-dialog--danger .modal_header {
+    background-color: $color-red;
+  }
+}

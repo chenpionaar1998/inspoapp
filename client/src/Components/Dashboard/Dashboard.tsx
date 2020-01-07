@@ -2,6 +2,9 @@
 import React from "react";
 import { Col, Container, Row } from "reactstrap";
 
+// Components
+import CreatePlanModal from '../UIKit/CreatePlanModal';
+
 class Dashboard extends React.PureComponent {
 
     render() {
@@ -14,6 +17,11 @@ class Dashboard extends React.PureComponent {
 							{" "}
 							Click on a board to view your activity
 						</h3>
+                        <div className="board_createbtn">
+							<CreatePlanModal
+								// onSubmit={this.createPlan}
+							/>
+						</div>
                     </Col>
                 </Row>
             </Container>

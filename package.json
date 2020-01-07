@@ -41,8 +41,8 @@
         "typescript": "^3.7.4"
     },
     "scripts": {
-        "start": "ts-node server.ts",
-        "server": "ts-node server.ts",
+        "start": "set HTTPS=true && ts-node server.ts",
+        "server": "set HTTPS=true && ts-node server.ts",
         "client": "npm start --prefix client",
         "dev": "concurrently \"npm run server\" \"npm run client\""
     },

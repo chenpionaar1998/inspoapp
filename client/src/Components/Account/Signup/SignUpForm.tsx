@@ -1,5 +1,6 @@
 // Libraries
 import React from 'react';
+import { Link } from "react-router-dom";
 
 // Icons
 import EyeIcon from 'mdi-react/EyeIcon';
@@ -132,9 +133,7 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
     this.setState((prevState: SignUpFormState) => ({ showPassword: !prevState.showPassword }));
   }
 
-  addUser = (e: React.MouseEvent | React.KeyboardEvent) => {
-    e.preventDefault();
-
+  addUser = () => {
     let formData: AccountInfoType = {
       fname: this.state.fname,
       lname: this.state.lname,
@@ -235,7 +234,7 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
           </div>        
         </div>
         <div className="account_btns">
-          <button id="submit"  className="btn btn-primary account_btn" onClick={e => this.addUser(e)}>Sign Up</button>
+          <Link id="submit" className="btn btn-primary account_btn" to={`/dashboard_default`} onClick={this.addUser}>Sign Up</Link>
         </div>
       </form>
     );

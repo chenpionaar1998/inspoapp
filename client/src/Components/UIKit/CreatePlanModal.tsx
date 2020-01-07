@@ -33,7 +33,7 @@ export default class CreatePlanModal extends React.PureComponent<{}, CreatePlanM
                 <Button
                     outline={false}
                     size='sm'
-                    color='success'
+                    color='primary'
                     btn="Create new plan"
                     className="icon account_btn"
                     onClick={this.toggleModal}
@@ -43,7 +43,7 @@ export default class CreatePlanModal extends React.PureComponent<{}, CreatePlanM
                 <Modal
                     isOpen={this.state.isOpen}
                     toggle={this.toggleModal}
-                    className={"modal-dialog--success theme-light"}
+                    className={"modal-dialog--primary theme-light"}
                 >
                     <div className="modal_header">
                         <button className="lnr lnr-cross modal_close-btn" type="button" onClick={this.toggleModal} />
@@ -70,7 +70,7 @@ export default class CreatePlanModal extends React.PureComponent<{}, CreatePlanM
                                     <Input
                                         name="startDate"
                                         type="date"
-                                        placeholder="current date"
+                                        placeholder="yyyy-mm-dd"
                                         value={this.state.start}
                                         onChange={event => this.handleInputChange(event, "start")}
                                     />
@@ -82,14 +82,14 @@ export default class CreatePlanModal extends React.PureComponent<{}, CreatePlanM
                                     <Input
                                         name="endDate"
                                         type="date"
-                                        placeholder="current date"
+                                        placeholder="yyyy-mm-dd"
                                         value={this.state.end}
                                         onChange={event => this.handleInputChange(event, "end")}
                                     />
                                 </div>
                             </div>
                             <ButtonToolbar className="modal_footer">
-                                <Button outline={false} color="success" type="submit">Create</Button>
+                                <Button outline={false} color="primary" type="submit">Create</Button>
                                 <Button onClick={this.toggleModal}>Cancel</Button>
                             </ButtonToolbar>
                         </form>

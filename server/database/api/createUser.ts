@@ -16,7 +16,8 @@ export async function signUp(formData: AccountInfoType): Promise<boolean> {
 
     if (!foundUser){
         const result = await pool.query('INSERT INTO users VALUES ($1, $2, $3, $4);', 
-        [formData.email, formData.password, formData.fname, formData.lname]).catch(err => {
+        [formData.email, formData.password, formData.fname, formData.lname])
+        .catch(err => {
             console.log("Create User Error: ", err);
             return false;
         });

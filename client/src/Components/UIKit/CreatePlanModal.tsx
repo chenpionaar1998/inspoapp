@@ -4,6 +4,7 @@ import { Button, ButtonToolbar, Modal, Input } from 'reactstrap';
 
 type CreatePlanModalState = {
     isOpen: boolean;
+    hasDateError: boolean;
     title: string;
     start: string;
     end: string;
@@ -12,20 +13,47 @@ type CreatePlanModalState = {
 export default class CreatePlanModal extends React.PureComponent<{}, CreatePlanModalState> {
     state = {
         isOpen: false,
+        hasDateError: false,
         title: "",
         start: "",
         end: ""
     }
 
-    toggleModal = () => {
-        this.setState(prevState => ({ isOpen: !prevState.isOpen }));
+    toggleModal = (): void => {
+        this.setState(prevState => ({ 
+            isOpen: !prevState.isOpen,
+            hasDateError: false,
+            title: "",
+            start: "",
+            end: ""
+        }));
     }
 
-	handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, inputPropName: string) => {
+	handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, inputPropName: string): void => {
 		this.setState<never>( {
 			[inputPropName] : event.target.value
-		});
-	}
+        }, () => {
+            if (inputPropName === "start" || inputPropName === "end") {
+                if (this.state.start !== "" && this.state.end !== "") {
+                    // Check end date and start date
+                    const start = new Date(this.state.start);
+                    const end = new Date(this.state.end);
+
+                    if (start.getTime() > end.getTime()) {
+                        this.setState({ hasDateError: true });
+                    }
+                    else {
+                        this.setState({ hasDateError: false });
+                    }
+                }
+            }
+        });
+
+    }
+    
+    hasEmptyField = (): boolean | undefined => {
+        return this.state.title === "" || this.state.start === "" || this.state.end === "" || this.state.hasDateError;
+    }
 
     render() {
         return (
@@ -87,9 +115,10 @@ export default class CreatePlanModal extends React.PureComponent<{}, CreatePlanM
                                         onChange={event => this.handleInputChange(event, "end")}
                                     />
                                 </div>
+                                <span style={{display: this.state.hasDateError ? "" : "none", color: "red"}}>The end date needs to be after the start date.</span>
                             </div>
                             <ButtonToolbar className="modal_footer">
-                                <Button outline={false} color="primary" type="submit">Create</Button>
+                                <Button outline={false} color="primary" type="submit" disabled={this.hasEmptyField()}>Create</Button>
                                 <Button onClick={this.toggleModal}>Cancel</Button>
                             </ButtonToolbar>
                         </form>

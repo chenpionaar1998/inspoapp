@@ -40,7 +40,7 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
 		}
 	}
 
-	checkUser = (e: React.MouseEvent) => {
+	checkUser = (e: React.MouseEvent): void => {
 		//fetch the data from loginUser
 		e.preventDefault();
 
@@ -52,13 +52,13 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
 		this.props.signIn(formData);
 	}
 
-	handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, inputPropName: string) => {
+	handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, inputPropName: string): void => {
 		this.setState<never>( {
 			[inputPropName] : event.target.value
 		});
 	}
 
-	showPassword = (e: React.MouseEvent) => {
+	showPassword = (e: React.MouseEvent): void => {
 		e.preventDefault();
 		this.setState(prevState => ({ showPassword: !prevState.showPassword }));
 	}

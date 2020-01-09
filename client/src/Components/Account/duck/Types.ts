@@ -25,6 +25,4 @@ export interface IUpdateAccountSignedInAction {
 
 export type UpdateUserInfoAction = (dispatch: Dispatch) => Promise<IUpdateUserInfoAction | void> | void;
 
-// export type UpdateAccountSignedInAction = (dispatch: Dispatch) => Promise<IUpdateAccountSignedInAction> | void;
-
 export type AccountAction = IUpdateUserInfoAction | IUpdateAccountSignedInAction;

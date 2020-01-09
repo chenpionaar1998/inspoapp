@@ -5,7 +5,7 @@ import { Router, Route, Switch, Redirect } from "react-router-dom";
 // Components 
 import SignUp from '../Account/Signup/SignUp';
 import SignIn from '../Account/SignIn/SignIn';
-import Dashboard from '../Dashboard/Dashboard';
+import ConnectedDashboard from '../Dashboard/ConnectedDashboard';
 import ConnectedPrivateRoute from './ConnectedPrivateRoute';
 import ConnectedTopNavigationBar from '../TopNavigationBar/ConnectedTopNavigationBar';
 
@@ -19,7 +19,7 @@ const wrappedRoutes = () => (
         <ConnectedTopNavigationBar/>
         <div className="container_wrap">
             <Route exact path="/dashboard_default">
-                <Dashboard/>
+                <ConnectedDashboard/>
             </Route>
         </div>
     </div>

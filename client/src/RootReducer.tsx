@@ -4,17 +4,21 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 // Types
-import { AccountState } from '../src/Components/Account/duck/Types';
+import { AccountState } from './Components/Account/duck/Types';
+import { DashboardState } from './Components/Dashboard/duck/Types';
 
 // Reducers
 import Account from './Components/Account/duck/Reducer';
+import Plans from './Components/Dashboard/duck/Reducer';
 
 const rootReducer = combineReducers({
-    Account
+    Account,
+    Plans
 });
 
 export type AppState = {
-    Account: AccountState
+    Account: AccountState;
+    Plans: DashboardState;
 }
 
 export default function configureStore() {

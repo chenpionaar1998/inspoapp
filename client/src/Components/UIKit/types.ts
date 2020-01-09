@@ -1,7 +1,7 @@
 // Libraries
 import uuid from 'uuid';
 
-export type CreatePlanFormType = {
+export type PlanInfoType = {
     planID: typeof uuid;
     title: string;
     start: string;

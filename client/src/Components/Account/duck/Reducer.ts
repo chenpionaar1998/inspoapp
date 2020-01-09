@@ -15,7 +15,7 @@ const initialState: AccountState  = {
     signedIn: isTrue(localStorage.signedIn)
 }
 
-const  Account = ( state: AccountState = initialState, action: AccountAction): AccountState => {
+const Account = ( state: AccountState = initialState, action: AccountAction): AccountState => {
     switch (action.type){
         case UPDATE_USER_INFO_ACTION:
             return {
@@ -32,7 +32,7 @@ const  Account = ( state: AccountState = initialState, action: AccountAction): A
                 signedIn: action.signedIn,
             }
         default: 
-        return state;
+            return state;
     }
 }
 

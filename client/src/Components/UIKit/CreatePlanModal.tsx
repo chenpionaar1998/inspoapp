@@ -48,11 +48,14 @@ export default class CreatePlanModal extends React.PureComponent<{}, CreatePlanM
                 }
             }
         });
-
     }
     
     hasEmptyField = (): boolean | undefined => {
         return this.state.title === "" || this.state.start === "" || this.state.end === "" || this.state.hasDateError;
+    }
+
+    createPlan = () => {
+        
     }
 
     render() {
@@ -118,7 +121,7 @@ export default class CreatePlanModal extends React.PureComponent<{}, CreatePlanM
                                 <span style={{display: this.state.hasDateError ? "" : "none", color: "red"}}>The end date needs to be after the start date.</span>
                             </div>
                             <ButtonToolbar className="modal_footer">
-                                <Button outline={false} color="primary" type="submit" disabled={this.hasEmptyField()}>Create</Button>
+                                <Button outline={false} color="primary" type="submit" disabled={this.hasEmptyField()} onClick={this.createPlan}>Create</Button>
                                 <Button onClick={this.toggleModal}>Cancel</Button>
                             </ButtonToolbar>
                         </form>

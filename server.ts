@@ -7,7 +7,8 @@ import path from "path";
 // Api
 import { signUp } from './server/database/api/createUser';
 import { signIn } from './server/database/api/signInUser';
- import { getUser } from './server/database/api/findUser';
+import { getUser } from './server/database/api/findUser';
+import { createPlan, linkUserToPlan } from './server/database/api/createPlan';
 
 dotenv.config();
 const app = express();
@@ -66,6 +67,30 @@ app.post("/api/signIn", async (req, res): Promise<void> => {
                 correctUser: false,
                 user: {}
             });
+        }
+    })
+});
+
+app.post("/api/createPlan", async (req, res): Promise<void> => {
+    const result = createPlan(req.body);
+    result.then(ress => {
+        if (ress) {
+            res.send({ success: true });
+        }
+        else {
+            res.send({ success: false });
+        }
+    })
+});
+
+app.post("/api/linkUserToPlan", async (req, res): Promise<void> => {
+    const result = linkUserToPlan(req.body);
+    result.then(ress => {
+        if (ress) {
+            res.send({ success: true });
+        }
+        else {
+            res.send({ success: false });
         }
     })
 });

@@ -1,8 +1,21 @@
 // Libraries
 import React from 'react';
 import { Button, ButtonToolbar, Modal, Input } from 'reactstrap';
+import uuid from 'uuid';
 
-type CreatePlanModalState = {
+// Types
+import { TravelPlanInfoType, UserPlanLinkType } from './types';
+import { InsertPlanAction } from '../Dashboard/duck/Types';
+
+type PlanModalProps = {
+    username: string;
+    buttonName: string;
+    buttonText: string;
+    onClick: (formData: TravelPlanInfoType)=> InsertPlanAction;
+    onLinkUser?: (formdata: UserPlanLinkType) => void;
+}
+
+type PlanModalState = {
     isOpen: boolean;
     hasDateError: boolean;
     title: string;
@@ -10,7 +23,7 @@ type CreatePlanModalState = {
     end: string;
 }
 
-export default class CreatePlanModal extends React.PureComponent<{}, CreatePlanModalState> {
+export default class PlanModal extends React.PureComponent<PlanModalProps, PlanModalState> {
     state = {
         isOpen: false,
         hasDateError: false,
@@ -54,8 +67,28 @@ export default class CreatePlanModal extends React.PureComponent<{}, CreatePlanM
         return this.state.title === "" || this.state.start === "" || this.state.end === "" || this.state.hasDateError;
     }
 
-    createPlan = () => {
-        
+    createPlan = (e: React.MouseEvent): void => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const planID = uuid.v4();
+
+        const formData: TravelPlanInfoType = {
+            planID: planID,
+            title: this.state.title,
+            start: this.state.start,
+            end: this.state.end
+        }
+
+        const linkData: UserPlanLinkType = {
+            email: this.props.username,
+            planID: planID
+        }
+
+        this.props.onClick(formData);
+        this.props.onLinkUser && this.props.onLinkUser(linkData);
+
+        this.toggleModal();
     }
 
     render() {
@@ -65,11 +98,11 @@ export default class CreatePlanModal extends React.PureComponent<{}, CreatePlanM
                     outline={false}
                     size='sm'
                     color='primary'
-                    btn="Create new plan"
+                    btn={this.props.buttonName}
                     className="icon account_btn"
                     onClick={this.toggleModal}
                 >
-                    Create Plan
+                    {this.props.buttonText} Plan
                 </Button>
                 <Modal
                     isOpen={this.state.isOpen}
@@ -78,10 +111,9 @@ export default class CreatePlanModal extends React.PureComponent<{}, CreatePlanM
                 >
                     <div className="modal_header">
                         <button className="lnr lnr-cross modal_close-btn" type="button" onClick={this.toggleModal} />
-                        <h4 className="modal_title">Create a new plan</h4>
+                        <h4 className="modal_title">{this.props.buttonName}</h4>
                     </div>
                     <div className="dashboard_place-order-form">
-                    {/* <form className="form form--vertical" onSubmit={e => this.handleFormSubmit(e)}> */}
                     <form className="form form--vertical" >
                             <div className="form_form-group">
                                 <span className="form_form-group-label">Plan Title</span>
@@ -121,7 +153,7 @@ export default class CreatePlanModal extends React.PureComponent<{}, CreatePlanM
                                 <span style={{display: this.state.hasDateError ? "" : "none", color: "red"}}>The end date needs to be after the start date.</span>
                             </div>
                             <ButtonToolbar className="modal_footer">
-                                <Button outline={false} color="primary" type="submit" disabled={this.hasEmptyField()} onClick={this.createPlan}>Create</Button>
+                                <Button outline={false} color="primary" type="submit" disabled={this.hasEmptyField()} onClick={this.createPlan}>{this.props.buttonText}</Button>
                                 <Button onClick={this.toggleModal}>Cancel</Button>
                             </ButtonToolbar>
                         </form>

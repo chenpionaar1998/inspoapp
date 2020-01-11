@@ -3,9 +3,21 @@ import React from "react";
 import { Col, Container, Row } from "reactstrap";
 
 // Components
-import CreatePlanModal from '../UIKit/CreatePlanModal';
+import PlanModal from '../UIKit/PlanModal';
 
-class Dashboard extends React.PureComponent {
+// Types
+import { TravelPlanInfoType } from '../UIKit/types';
+import { InsertPlanAction } from './duck/Types';
+
+// Actions
+import { linkUserToPlan } from "./duck/Actions";
+
+type DashboardProps = {
+    username: string;
+    createPlan: (formData: TravelPlanInfoType) => InsertPlanAction;
+}
+
+class Dashboard extends React.PureComponent<DashboardProps> {
 
     render() {
         return (
@@ -18,8 +30,12 @@ class Dashboard extends React.PureComponent {
 							Click on a board to view your activity
 						</h3>
                         <div className="board_createbtn">
-							<CreatePlanModal
-								// onSubmit={this.createPlan}
+							<PlanModal
+                                username={this.props.username}
+                                buttonName="Create a Plan"
+                                buttonText="Create"
+                                onClick={this.props.createPlan}
+                                onLinkUser={linkUserToPlan}
 							/>
 						</div>
                     </Col>

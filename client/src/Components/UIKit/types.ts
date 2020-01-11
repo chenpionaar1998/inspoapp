@@ -1,14 +1,11 @@
-// Libraries
-import uuid from 'uuid';
-
-export type PlanInfoType = {
-    planID: typeof uuid;
+export type TravelPlanInfoType = {
+    planID: string;
     title: string;
     start: string;
     end: string;
 }
 
-export type planLinkFormType = {
+export type UserPlanLinkType = {
     email: string;
-    planID: typeof uuid;
+    planID: string;
 }

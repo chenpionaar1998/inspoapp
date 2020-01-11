@@ -128,12 +128,12 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
     return result;
   }
 
-  showPassword(e: React.MouseEvent) {
+  showPassword(e: React.MouseEvent): void {
     e.preventDefault();
     this.setState((prevState: SignUpFormState) => ({ showPassword: !prevState.showPassword }));
   }
 
-  addUser = () => {
+  addUser = (): void => {
     let formData: AccountInfoType = {
       fname: this.state.fname,
       lname: this.state.lname,

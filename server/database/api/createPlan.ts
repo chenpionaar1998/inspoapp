@@ -2,9 +2,9 @@
 import pool from '../database';
 
 // Types
-import { PlanInfoType, planLinkFormType } from '../../../client/src/Components/UIKit/types';
+import { TravelPlanInfoType, UserPlanLinkType } from '../../../client/src/Components/UIKit/types';
 
-export async function createPlan(formData: PlanInfoType): Promise<boolean> {
+export async function createPlan(formData: TravelPlanInfoType): Promise<boolean> {
     const result = await pool.query("INSERT INTO travelPlans VALUES ($1, $2, $3, $4);",
     [formData.planID, formData.title, formData.start, formData.end])
     .catch(err => {
@@ -14,9 +14,11 @@ export async function createPlan(formData: PlanInfoType): Promise<boolean> {
     if (result) {
         return true;
     }
+
+    return false;
 }
 
-export async function linkUserToPlan(formData: planLinkFormType): Promise<boolean> {
+export async function linkUserToPlan(formData: UserPlanLinkType): Promise<boolean> {
     const result = await pool.query("INSERT INTO authors VALUES ($1, $2);",
     [formData.email, formData.planID])
     .catch(err => {
@@ -26,4 +28,6 @@ export async function linkUserToPlan(formData: planLinkFormType): Promise<boolea
     if (result) {
         return true;
     }
+
+    return false;
 }

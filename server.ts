@@ -9,6 +9,7 @@ import { signUp } from './server/database/api/createUser';
 import { signIn } from './server/database/api/signInUser';
 import { getUser } from './server/database/api/findUser';
 import { createPlan, linkUserToPlan } from './server/database/api/createPlan';
+import { fetchPlansForUser, getPlansInfoWithID } from './server/database/api/fetchPlans';
 
 dotenv.config();
 const app = express();
@@ -94,6 +95,44 @@ app.post("/api/linkUserToPlan", async (req, res): Promise<void> => {
         }
     })
 });
+
+app.post("/api/fetchPlansForUser", async (req, res): Promise<void> => {
+    const result = fetchPlansForUser(req.body);
+
+    result.then(ress => {
+        if (ress) {
+            res.send({ 
+                success: true,
+                planIDs: ress
+            });
+        }
+        else {
+            res.send({ 
+                success: false,
+                planIDs: {}
+            });
+        }
+    })
+});
+
+app.post("/api/getPlansInfoWithID", async (req, res): Promise<void> => {
+    const result = getPlansInfoWithID(req.body);
+    result.then(ress => {
+        if (ress) {
+            res.send({ 
+                success: true,
+                plans: ress.plans
+            });
+        }
+        else {
+            res.send({ 
+                success: false,
+                plans: []
+            });
+        }
+    })
+});
+
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);

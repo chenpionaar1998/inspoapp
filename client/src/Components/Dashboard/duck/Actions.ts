@@ -6,7 +6,10 @@ import { TravelPlanInfoType, UserPlanLinkType } from "../../UIKit/types";
 import {
     INSERT_PLAN_ACTION,
     IInsertPlanAction,
-    InsertPlanAction
+    InsertPlanAction,
+    FetchPlanAction,
+    IFetchPlanAction,
+    FETCH_PLAN_ACTION
 } from "./Types";
 
 export function createPlan (formData: TravelPlanInfoType): InsertPlanAction {
@@ -42,13 +45,43 @@ export function linkUserToPlan (formData: UserPlanLinkType): void {
     });
 }
 
-export function fetchPlans (): any {
-
+export function fetchPlansFromDB (username: string): FetchPlanAction {
+    return (dispatch: Dispatch) => {
+        fetch('/api/fetchPlansForUser', {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({email: username})
+        })
+        .then(response => response.json())
+        .then(res => {
+            if (res.success) {
+                // if the query was successful we use the ids we got to query the details of the plans
+                fetch('/api/getPlansInfoWithID', {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(res.planIDs)
+                })
+                .then(response => response.json())
+                .then(res => {
+                    if (res.success) {
+                        return dispatch(fetchPlans(res.plans));
+                    }
+                });
+            }
+        });
+    }
 }
 
 function insertPlan (formData: TravelPlanInfoType): IInsertPlanAction {
     return {
         type: INSERT_PLAN_ACTION,
         plan: formData
+    }
+}
+
+function fetchPlans (plans: TravelPlanInfoType[]): IFetchPlanAction {
+    return {
+        type: FETCH_PLAN_ACTION,
+        plans: plans
     }
 }

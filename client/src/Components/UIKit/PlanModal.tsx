@@ -118,7 +118,7 @@ export default class PlanModal extends React.PureComponent<PlanModalProps, PlanM
                             <div className="form_form-group">
                                 <span className="form_form-group-label">Plan Title</span>
                                 <div className="form_form-group-field">
-                                    <input
+                                    <Input
                                         name="title"
                                         type="text"
                                         placeholder="Title"

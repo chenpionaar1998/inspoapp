@@ -2,7 +2,7 @@
 import { connect } from "react-redux";
 
 // Actions
-import { createPlan } from './duck/Actions'
+import { createPlan, fetchPlansFromDB } from './duck/Actions'
 
 // Components
 import Dashboard from './Dashboard';
@@ -11,13 +11,15 @@ import Dashboard from './Dashboard';
 import { AppState } from '../../RootReducer';
 
 const mapStateToProps = (state: AppState) => ({
-    username: state.Account.userName
+    username: state.Account.userName,
+    plans: state.Plans.plans
 });
 
 const ConnectedDashboard = connect(
     mapStateToProps,
     {
         createPlan: createPlan,
+        fetchPlansFromDB: fetchPlansFromDB
     }
 )(Dashboard as any)
 

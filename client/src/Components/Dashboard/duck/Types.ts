@@ -5,6 +5,7 @@ import { Dispatch } from 'redux';
 import { TravelPlanInfoType } from '../../UIKit/types';
 
 export const INSERT_PLAN_ACTION = "@@DASHBOARD/INSERT_PLAN_ACTION";
+export const FETCH_PLAN_ACTION = "@@DASHBOARD/FETCH_PLAN_ACTION";
 
 export interface DashboardState {
     plans: TravelPlanInfoType[];
@@ -15,6 +16,12 @@ export interface IInsertPlanAction {
     plan: TravelPlanInfoType
 }
 
-export type InsertPlanAction = (dispatch: Dispatch) => Promise<IInsertPlanAction | void> | void;
+export interface IFetchPlanAction {
+    type: typeof FETCH_PLAN_ACTION,
+    plans: TravelPlanInfoType[]
+}
 
-export type DashboardAction = IInsertPlanAction;
+export type InsertPlanAction = (dispatch: Dispatch) => Promise<IInsertPlanAction | void> | void;
+export type FetchPlanAction = (dispatch: Dispatch) => Promise<IFetchPlanAction | void | unknown> | void;
+
+export type DashboardAction = IInsertPlanAction | IFetchPlanAction;

@@ -2,7 +2,7 @@
 import { connect } from "react-redux";
 
 // Actions
-import { createPlan, fetchPlansFromDB } from './duck/Actions'
+import { createPlan, fetchPlansFromDB, editPlan } from './duck/Actions'
 
 // Components
 import Dashboard from './Dashboard';
@@ -19,6 +19,7 @@ const ConnectedDashboard = connect(
     mapStateToProps,
     {
         createPlan: createPlan,
+        editPlan: editPlan,
         fetchPlansFromDB: fetchPlansFromDB
     }
 )(Dashboard as any)

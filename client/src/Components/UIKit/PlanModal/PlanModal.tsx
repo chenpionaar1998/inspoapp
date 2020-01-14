@@ -5,17 +5,23 @@ import uuid from 'uuid';
 
 // Types
 import { TravelPlanInfoType, UserPlanLinkType } from './types';
-import { InsertPlanAction } from '../Dashboard/duck/Types';
+import { InsertPlanAction, EditPlanAction } from '../../Dashboard/duck/Types';
+
+// Util
+import { isCreatePlan } from './util';
+import { trimTimeString } from '../../../utils/strings';
 
 type PlanModalProps = {
     username: string;
+    item?: TravelPlanInfoType;
     buttonName: string;
     buttonText: string;
-    onClick: (formData: TravelPlanInfoType)=> InsertPlanAction;
+    onClick: (formData: TravelPlanInfoType)=> InsertPlanAction | EditPlanAction;
     onLinkUser?: (formdata: UserPlanLinkType) => void;
 }
 
 type PlanModalState = {
+    planID: string;
     isOpen: boolean;
     hasDateError: boolean;
     title: string;
@@ -25,6 +31,7 @@ type PlanModalState = {
 
 export default class PlanModal extends React.PureComponent<PlanModalProps, PlanModalState> {
     state = {
+        planID: this.props.item ? this.props.item.planID : uuid.v4(),
         isOpen: false,
         hasDateError: false,
         title: "",
@@ -33,13 +40,24 @@ export default class PlanModal extends React.PureComponent<PlanModalProps, PlanM
     }
 
     toggleModal = (): void => {
-        this.setState(prevState => ({ 
-            isOpen: !prevState.isOpen,
-            hasDateError: false,
-            title: "",
-            start: "",
-            end: ""
-        }));
+        if (this.props.item && isCreatePlan(this.props.buttonText)){
+            this.setState(prevState => ({ 
+                isOpen: !prevState.isOpen,
+                hasDateError: false,
+                title: "",
+                start: "",
+                end: ""
+            }));
+        }
+        else {
+            this.setState(prevState => ({
+                isOpen: !prevState.isOpen,
+                hasDateError: false,
+                title: this.props.item ? this.props.item.title : "",
+                start: this.props.item ? trimTimeString(this.props.item.start) : "",
+                end: this.props.item ? trimTimeString(this.props.item.end) : ""
+            }))
+        }
     }
 
 	handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, inputPropName: string): void => {
@@ -71,10 +89,8 @@ export default class PlanModal extends React.PureComponent<PlanModalProps, PlanM
         e.preventDefault();
         e.stopPropagation();
 
-        const planID = uuid.v4();
-
         const formData: TravelPlanInfoType = {
-            planID: planID,
+            planID: this.state.planID,
             title: this.state.title,
             start: this.state.start,
             end: this.state.end
@@ -82,11 +98,27 @@ export default class PlanModal extends React.PureComponent<PlanModalProps, PlanM
 
         const linkData: UserPlanLinkType = {
             email: this.props.username,
-            planID: planID
+            planID: this.state.planID
         }
 
         this.props.onClick(formData);
         this.props.onLinkUser && this.props.onLinkUser(linkData);
+
+        this.toggleModal();
+    }
+
+    editPlan = (e: React.MouseEvent): void => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const formData: TravelPlanInfoType = {
+            planID: this.state.planID,
+            title: this.state.title,
+            start: this.state.start,
+            end: this.state.end
+        }
+
+        this.props.onClick(formData);
 
         this.toggleModal();
     }
@@ -153,7 +185,7 @@ export default class PlanModal extends React.PureComponent<PlanModalProps, PlanM
                                 <span style={{display: this.state.hasDateError ? "" : "none", color: "red"}}>The end date needs to be after the start date.</span>
                             </div>
                             <ButtonToolbar className="modal_footer">
-                                <Button outline={false} color="primary" type="submit" disabled={this.hasEmptyField()} onClick={this.createPlan}>{this.props.buttonText}</Button>
+                                <Button outline={false} color="primary" type="submit" disabled={this.hasEmptyField()} onClick={this.props.buttonText === "Create" ? this.createPlan : this.editPlan}>{this.props.buttonText}</Button>
                                 <Button onClick={this.toggleModal}>Cancel</Button>
                             </ButtonToolbar>
                         </form>

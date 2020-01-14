@@ -2,7 +2,7 @@
 import pool from '../database';
 
 // Types
-import { TravelPlanInfoType, UserPlanLinkType } from '../../../client/src/Components/UIKit/types';
+import { TravelPlanInfoType, UserPlanLinkType } from '../../../client/src/Components/UIKit/PlanModal/types';
 
 export async function createPlan(formData: TravelPlanInfoType): Promise<boolean> {
     const result = await pool.query("INSERT INTO travelPlans VALUES ($1, $2, $3, $4);",

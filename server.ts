@@ -10,6 +10,7 @@ import { signIn } from './server/database/api/signInUser';
 import { getUser } from './server/database/api/findUser';
 import { createPlan, linkUserToPlan } from './server/database/api/createPlan';
 import { fetchPlansForUser, getPlansInfoWithID } from './server/database/api/fetchPlans';
+import { editPlan } from './server/database/api/modifyPlan';
 
 dotenv.config();
 const app = express();
@@ -27,7 +28,7 @@ if (dev === "production") {
 
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname,'./client/build', 'index.html'));
-    })
+    });
 }
 
 app.post("/api/signUp", async (req, res): Promise<void> => {
@@ -69,7 +70,7 @@ app.post("/api/signIn", async (req, res): Promise<void> => {
                 user: {}
             });
         }
-    })
+    });
 });
 
 app.post("/api/createPlan", async (req, res): Promise<void> => {
@@ -81,7 +82,7 @@ app.post("/api/createPlan", async (req, res): Promise<void> => {
         else {
             res.send({ success: false });
         }
-    })
+    });
 });
 
 app.post("/api/linkUserToPlan", async (req, res): Promise<void> => {
@@ -93,7 +94,7 @@ app.post("/api/linkUserToPlan", async (req, res): Promise<void> => {
         else {
             res.send({ success: false });
         }
-    })
+    });
 });
 
 app.post("/api/fetchPlansForUser", async (req, res): Promise<void> => {
@@ -112,7 +113,7 @@ app.post("/api/fetchPlansForUser", async (req, res): Promise<void> => {
                 planIDs: {}
             });
         }
-    })
+    });
 });
 
 app.post("/api/getPlansInfoWithID", async (req, res): Promise<void> => {
@@ -130,8 +131,20 @@ app.post("/api/getPlansInfoWithID", async (req, res): Promise<void> => {
                 plans: []
             });
         }
-    })
+    });
 });
+
+app.post("/api/editPlan", async (req, res): Promise<void> => {
+    const result = editPlan(req.body);
+    result.then(ress => {
+        if (ress) {
+            res.send({ success: true });
+        }
+        else {
+            res.send({ success: false });
+        }
+    });
+})
 
 
 app.listen(port, () => {

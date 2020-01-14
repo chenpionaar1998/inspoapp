@@ -3,13 +3,13 @@ import React from "react";
 import { Col, Container, Row } from "reactstrap";
 
 // Components
-import PlanModal from '../UIKit/PlanModal';
+import PlanModal from '../UIKit/PlanModal/PlanModal';
 import BoardItems from "../UIKit/BoardItems/BoardItems";
 import LoadingIndicator from '../UIKit/LoadingIndicator';
 
 // Types
-import { TravelPlanInfoType } from '../UIKit/types';
-import { InsertPlanAction, FetchPlanAction } from './duck/Types';
+import { TravelPlanInfoType } from '../UIKit/PlanModal/types';
+import { InsertPlanAction, FetchPlanAction, EditPlanAction } from './duck/Types';
 
 // Actions
 import { linkUserToPlan } from "./duck/Actions";
@@ -18,7 +18,8 @@ type DashboardProps = {
     username: string;
     plans: TravelPlanInfoType[];
     createPlan: (formData: TravelPlanInfoType) => InsertPlanAction;
-    fetchPlansFromDB: (username: string) => FetchPlanAction
+    editPlan: (formData: TravelPlanInfoType) => EditPlanAction;
+    fetchPlansFromDB: (username: string) => FetchPlanAction;
 }
 
 class Dashboard extends React.PureComponent<DashboardProps> {
@@ -53,14 +54,10 @@ class Dashboard extends React.PureComponent<DashboardProps> {
                             <LoadingIndicator />
                         }
                         <BoardItems
+                            username={this.props.username}
                             items={this.props.plans}
+                            editPlan={this.props.editPlan}
                         />
-                        {/* <BoardItems
-                            loggedUser={this.state.loggedUser}
-                            items={this.state.plans}
-                            editPlan={this.editPlan}
-                            deletePlan={this.deletePlan}
-                        /> */}
                     </Col>
 				</Row>
             </Container>

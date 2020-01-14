@@ -2,7 +2,7 @@
 import pool from '../database';
 
 // Type
-import { TravelPlanInfoType } from '../../../client/src/Components/UIKit/types';
+import { TravelPlanInfoType } from '../../../client/src/Components/UIKit/PlanModal/types';
 
 type fetchPlansForUserReqType = {
     email: string;

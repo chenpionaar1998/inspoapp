@@ -2,14 +2,17 @@
 import { Dispatch } from "redux";
 
 // Types
-import { TravelPlanInfoType, UserPlanLinkType } from "../../UIKit/types";
+import { TravelPlanInfoType, UserPlanLinkType } from "../../UIKit/PlanModal/types";
 import {
     INSERT_PLAN_ACTION,
     IInsertPlanAction,
     InsertPlanAction,
     FetchPlanAction,
     IFetchPlanAction,
-    FETCH_PLAN_ACTION
+    FETCH_PLAN_ACTION,
+    EDIT_PLAN_ACTION,
+    IEditPlanAction,
+    EditPlanAction
 } from "./Types";
 
 export function createPlan (formData: TravelPlanInfoType): InsertPlanAction {
@@ -72,6 +75,24 @@ export function fetchPlansFromDB (username: string): FetchPlanAction {
     }
 }
 
+export function editPlan (formData: TravelPlanInfoType): EditPlanAction {
+    return (dispatch: Dispatch) => {
+        fetch('/api/editPlan', {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(res => {
+            if (res.success) {
+                return dispatch(modifyPlan(formData));
+            }
+        });
+    }
+}
+
+export function deletePlan (planID: string): any {}
+
 function insertPlan (formData: TravelPlanInfoType): IInsertPlanAction {
     return {
         type: INSERT_PLAN_ACTION,
@@ -83,5 +104,12 @@ function fetchPlans (plans: TravelPlanInfoType[]): IFetchPlanAction {
     return {
         type: FETCH_PLAN_ACTION,
         plans: plans
+    }
+}
+
+function modifyPlan (formData: TravelPlanInfoType): IEditPlanAction {
+    return {
+        type: EDIT_PLAN_ACTION,
+        plan: formData
     }
 }

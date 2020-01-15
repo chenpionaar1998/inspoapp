@@ -9,7 +9,8 @@ CREATE TABLE travelPlans (
 	planID varchar(50) PRIMARY KEY,
 	title varchar(50) NOT NULL,
 	planStartDate DATE NOT NULL,
-	planEndDate DATE NOT NULL
+	planEndDate DATE NOT NULL,
+	timeCreated varchar(30) NOT NULL
 );
 
 CREATE TABLE authors (

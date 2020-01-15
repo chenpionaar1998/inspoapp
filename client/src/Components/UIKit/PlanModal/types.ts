@@ -3,6 +3,7 @@ export type TravelPlanInfoType = {
     title: string;
     start: string;
     end: string;
+    timeCreated: string;
 }
 
 export type UserPlanLinkType = {

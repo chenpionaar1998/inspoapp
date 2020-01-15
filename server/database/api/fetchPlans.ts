@@ -40,6 +40,7 @@ export async function getPlansInfoWithID(reqObj: getPlansInfoWithIDReqType): Pro
             title: res.rows[0].title,
             start: res.rows[0].planstartdate,
             end: res.rows[0].planenddate,
+            timeCreated: res.rows[0].timecreated
         });
     };
 

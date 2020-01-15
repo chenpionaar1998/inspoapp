@@ -12,8 +12,14 @@ import {
     FETCH_PLAN_ACTION,
     EDIT_PLAN_ACTION,
     IEditPlanAction,
-    EditPlanAction
+    EditPlanAction,
+    DeletePlanAction,
+    IDeletePlanAction,
+    DELETE_PLAN_ACTION
 } from "./Types";
+
+// Util
+import { sortTravelPlans } from './util';
 
 export function createPlan (formData: TravelPlanInfoType): InsertPlanAction {
     return (dispatch: Dispatch) => {
@@ -67,7 +73,7 @@ export function fetchPlansFromDB (username: string): FetchPlanAction {
                 .then(response => response.json())
                 .then(res => {
                     if (res.success) {
-                        return dispatch(fetchPlans(res.plans));
+                        return dispatch(fetchPlans(sortTravelPlans(res.plans)));
                     }
                 });
             }
@@ -91,7 +97,21 @@ export function editPlan (formData: TravelPlanInfoType): EditPlanAction {
     }
 }
 
-export function deletePlan (planID: string): any {}
+export function deletePlan (userLink: UserPlanLinkType): DeletePlanAction {
+    return (dispatch: Dispatch) => {
+        fetch('/api/deletePlan', {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userLink)
+        })
+        .then(response => response.json())
+        .then(res => {
+            if (res.success) {
+                return dispatch(removePlan(userLink.planID));
+            }
+        });
+    }
+}
 
 function insertPlan (formData: TravelPlanInfoType): IInsertPlanAction {
     return {
@@ -111,5 +131,12 @@ function modifyPlan (formData: TravelPlanInfoType): IEditPlanAction {
     return {
         type: EDIT_PLAN_ACTION,
         plan: formData
+    }
+}
+
+function removePlan (planID: string): IDeletePlanAction {
+    return {
+        type: DELETE_PLAN_ACTION,
+        planID: planID
     }
 }

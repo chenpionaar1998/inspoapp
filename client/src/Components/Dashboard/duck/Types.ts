@@ -30,11 +30,12 @@ export interface IEditPlanAction {
 
 export interface IDeletePlanAction {
     type: typeof DELETE_PLAN_ACTION,
-    plan: TravelPlanInfoType
+    planID: string
 }
 
 export type InsertPlanAction = (dispatch: Dispatch) => Promise<IInsertPlanAction | void> | void;
 export type FetchPlanAction = (dispatch: Dispatch) => Promise<IFetchPlanAction | void | unknown> | void;
 export type EditPlanAction = (dispatch: Dispatch) => Promise<IEditPlanAction | void> | void;
+export type DeletePlanAction = (dispatch: Dispatch) => Promise<IDeletePlanAction | void> | void;
 
-export type DashboardAction = IInsertPlanAction | IFetchPlanAction | IEditPlanAction;
+export type DashboardAction = IInsertPlanAction | IFetchPlanAction | IEditPlanAction | IDeletePlanAction;

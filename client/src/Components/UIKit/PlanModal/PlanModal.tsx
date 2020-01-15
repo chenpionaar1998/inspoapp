@@ -10,6 +10,7 @@ import { InsertPlanAction, EditPlanAction } from '../../Dashboard/duck/Types';
 // Util
 import { isCreatePlan } from './util';
 import { trimTimeString } from '../../../utils/strings';
+import { getCurrentTime } from '../../../utils/utils';
 
 type PlanModalProps = {
     username: string;
@@ -93,7 +94,8 @@ export default class PlanModal extends React.PureComponent<PlanModalProps, PlanM
             planID: this.state.planID,
             title: this.state.title,
             start: this.state.start,
-            end: this.state.end
+            end: this.state.end,
+            timeCreated: getCurrentTime()
         }
 
         const linkData: UserPlanLinkType = {
@@ -115,7 +117,8 @@ export default class PlanModal extends React.PureComponent<PlanModalProps, PlanM
             planID: this.state.planID,
             title: this.state.title,
             start: this.state.start,
-            end: this.state.end
+            end: this.state.end,
+            timeCreated: getCurrentTime()
         }
 
         this.props.onClick(formData);

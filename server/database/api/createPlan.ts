@@ -5,8 +5,8 @@ import pool from '../database';
 import { TravelPlanInfoType, UserPlanLinkType } from '../../../client/src/Components/UIKit/PlanModal/types';
 
 export async function createPlan(formData: TravelPlanInfoType): Promise<boolean> {
-    const result = await pool.query("INSERT INTO travelPlans VALUES ($1, $2, $3, $4);",
-    [formData.planID, formData.title, formData.start, formData.end])
+    const result = await pool.query("INSERT INTO travelPlans VALUES ($1, $2, $3, $4, $5);",
+    [formData.planID, formData.title, formData.start, formData.end, formData.timeCreated])
     .catch(err => {
         console.log("Create Plan Error: ", err);
         return false;

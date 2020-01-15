@@ -2,10 +2,10 @@
 import React from 'react';
 
 // Types
-import { TravelPlanInfoType } from '../PlanModal/types';
+import { TravelPlanInfoType, UserPlanLinkType } from '../PlanModal/types';
 
 // Actions
-import { EditPlanAction } from '../../Dashboard/duck/Types';
+import { EditPlanAction, DeletePlanAction } from '../../Dashboard/duck/Types';
 
 // Components
 import BoardItem from './BoardItem';
@@ -14,6 +14,7 @@ type BoardItemsProps = {
     username: string;
     items: TravelPlanInfoType[];
     editPlan: (formData: TravelPlanInfoType) => EditPlanAction;
+    deletePlan: (userLink: UserPlanLinkType) => DeletePlanAction;
 }
 
 export default class BoardItems extends React.PureComponent<BoardItemsProps> {
@@ -28,6 +29,7 @@ export default class BoardItems extends React.PureComponent<BoardItemsProps> {
               item={item}
               username={this.props.username}
               editPlan={this.props.editPlan}
+              deletePlan={this.props.deletePlan}
             />
           ))}
         </div>

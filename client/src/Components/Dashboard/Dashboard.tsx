@@ -8,8 +8,8 @@ import BoardItems from "../UIKit/BoardItems/BoardItems";
 import LoadingIndicator from '../UIKit/LoadingIndicator';
 
 // Types
-import { TravelPlanInfoType } from '../UIKit/PlanModal/types';
-import { InsertPlanAction, FetchPlanAction, EditPlanAction } from './duck/Types';
+import { TravelPlanInfoType, UserPlanLinkType } from '../UIKit/PlanModal/types';
+import { InsertPlanAction, FetchPlanAction, EditPlanAction, DeletePlanAction } from './duck/Types';
 
 // Actions
 import { linkUserToPlan } from "./duck/Actions";
@@ -19,6 +19,7 @@ type DashboardProps = {
     plans: TravelPlanInfoType[];
     createPlan: (formData: TravelPlanInfoType) => InsertPlanAction;
     editPlan: (formData: TravelPlanInfoType) => EditPlanAction;
+    deletePlan: (userLink: UserPlanLinkType) => DeletePlanAction;
     fetchPlansFromDB: (username: string) => FetchPlanAction;
 }
 
@@ -50,13 +51,14 @@ class Dashboard extends React.PureComponent<DashboardProps> {
                 </Row>
                 <Row>
                     <Col md={12} lg={12}>
-                        {this.props.plans.length === 0 &&  
+                        {this.props.plans.length === 0 &&  !this.props.username &&
                             <LoadingIndicator />
                         }
                         <BoardItems
                             username={this.props.username}
                             items={this.props.plans}
                             editPlan={this.props.editPlan}
+                            deletePlan={this.props.deletePlan}
                         />
                     </Col>
 				</Row>

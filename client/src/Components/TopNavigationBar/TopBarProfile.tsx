@@ -46,6 +46,7 @@ export default class TopBarProfile extends React.PureComponent<TopBarProfileProp
             {this.state.collapsed && <button className="topbar_back" type="button" onClick={this.toggle} />}
             <Collapse isOpen={this.state.collapsed} className="topbar_menu-wrap">
               <div className="topbar_menu">
+                <TopBarMenuLink title="Home" icon="home" path="/" />
                 <TopBarMenuLink title="My Profile" icon="user" path="/" />
                 <TopBarMenuLink title="Sign Out" icon="exit" path="/" onClick={this.props.signOut}/>
               </div>

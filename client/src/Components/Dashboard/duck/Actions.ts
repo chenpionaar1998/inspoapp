@@ -35,6 +35,7 @@ export function createPlan (formData: TravelPlanInfoType): InsertPlanAction {
             }
             else {
                 // add error state dispatch
+                console.log("CREATE PLAN ACTION ERRORRRRRRRRRRR");
             }
         });
     }

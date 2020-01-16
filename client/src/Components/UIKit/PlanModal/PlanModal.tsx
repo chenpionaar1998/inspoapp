@@ -32,7 +32,7 @@ type PlanModalState = {
 
 export default class PlanModal extends React.PureComponent<PlanModalProps, PlanModalState> {
     state = {
-        planID: this.props.item ? this.props.item.planID : uuid.v4(),
+        planID: "",
         isOpen: false,
         hasDateError: false,
         title: "",
@@ -41,10 +41,11 @@ export default class PlanModal extends React.PureComponent<PlanModalProps, PlanM
     }
 
     toggleModal = (): void => {
-        if (this.props.item && isCreatePlan(this.props.buttonText)){
+        if (!this.props.item && isCreatePlan(this.props.buttonText)){
             this.setState(prevState => ({ 
                 isOpen: !prevState.isOpen,
                 hasDateError: false,
+                planID: !prevState.isOpen ? uuid.v4() : "",
                 title: "",
                 start: "",
                 end: ""
@@ -54,10 +55,11 @@ export default class PlanModal extends React.PureComponent<PlanModalProps, PlanM
             this.setState(prevState => ({
                 isOpen: !prevState.isOpen,
                 hasDateError: false,
+                planID: this.props.item ? this.props.item.planID : uuid.v4(),
                 title: this.props.item ? this.props.item.title : "",
                 start: this.props.item ? trimTimeString(this.props.item.start) : "",
                 end: this.props.item ? trimTimeString(this.props.item.end) : ""
-            }))
+            }));
         }
     }
 

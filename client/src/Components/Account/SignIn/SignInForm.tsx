@@ -1,6 +1,7 @@
 // Libraries
 import React, { PureComponent } from "react";
 import { Link } from "react-router-dom";
+import { Input } from 'reactstrap';
 
 // Icons
 import EyeIcon from "mdi-react/EyeIcon";
@@ -49,7 +50,9 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
 			password: this.state.password
 		};
 
-		this.props.signIn(formData);
+		if (!this.hasEmptyFields()) {
+			this.props.signIn(formData);
+		}
 	}
 
 	handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, inputPropName: string): void => {
@@ -63,6 +66,10 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
 		this.setState(prevState => ({ showPassword: !prevState.showPassword }));
 	}
 
+	hasEmptyFields = () => {
+		return this.state.email === "" || this.state.password === "";
+	}
+
 	render() {
 		const { showPassword } = this.state;
 
@@ -74,7 +81,7 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
 						<div className="form_form-group-icon">
 							<AccountOutlineIcon />
 						</div>
-						<input
+						<Input
 							name="username"
 							type="text"
 							placeholder="Username"
@@ -89,7 +96,7 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
 						<div className="form_form-group-icon">
 							<KeyVariantIcon />
 						</div>
-						<input
+						<Input
 							name="password"
 							type={showPassword ? "text" : "password"}
 							placeholder="Password"
@@ -109,13 +116,13 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
 				</div>
 				<div className="account_btns">
 					<Link
-						className="btn btn-primary account_btn"
+						className="btn btn-primary account_btn signin_btn"
 						to={`/dashboard_default`}
  						onClick={this.checkUser}
 					>
 						Sign In
 					</Link>
-					<Link className="btn btn-outline-primary account_btn" to="/signup">
+					<Link className="btn btn-outline-primary account_btn signup_btn" to="/signup">
 						Create Account
 					</Link>
 				</div>

@@ -1,6 +1,7 @@
 // Libraries
 import React from 'react';
 import { Link } from "react-router-dom";
+import { Input } from 'reactstrap';
 
 // Icons
 import EyeIcon from 'mdi-react/EyeIcon';
@@ -52,12 +53,6 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
   validator: validatorType = validator;
 
   componentDidMount() {
-    // Disable submit button
-    const submitButton = document.getElementById("submit") as HTMLButtonElement;
-    if (submitButton) {
-      submitButton.disabled = true;
-    }
-
     // Initialize validator
     this.resetValidator();
   }
@@ -96,19 +91,7 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
       }
     );
 
-    let status = true;
-    Object.keys(this.validator).forEach((field) => {
-      if (!this.validator[field].valid) {
-        status = false;
-      }
-    });
-
     this.displayValidationErrors(fieldName);
-
-    const submitButton = document.getElementById('submit') as HTMLButtonElement;
-    if (submitButton) {
-      submitButton.disabled = status ? false : true;
-    }
   }
 
   displayValidationErrors = (fieldName: string) => {
@@ -120,7 +103,7 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
           <div key={index} className="error_div">
             <span className="error"> {info}</span>
             <br />
-          </ div>
+          </div>
         );
       });
       return errors;
@@ -133,7 +116,9 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
     this.setState((prevState: SignUpFormState) => ({ showPassword: !prevState.showPassword }));
   }
 
-  addUser = (): void => {
+  addUser = (e: React.MouseEvent): void => {
+    e.preventDefault();
+
     let formData: AccountInfoType = {
       fname: this.state.fname,
       lname: this.state.lname,
@@ -141,7 +126,22 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
       password: this.state.password,
     }
 
-    this.props.signUp(formData);
+    if (!this.hasEmptyFields() && !this.hasValidatorError()){
+      this.props.signUp(formData);
+    }
+  }
+
+  hasValidatorError = (): boolean => {
+    for (const field in this.validator) {
+      if (this.validator[field].errors) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  hasEmptyFields = (): boolean => {
+    return this.state.email === "" || this.state.fname === "" || this.state.lname === "" || this.state.password === "";
   }
 
   render() {
@@ -155,7 +155,7 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
             <div className="form_form-group-icon">
               <AccountOutlineIcon />
             </div>
-            <input
+            <Input
               id = "fname"
               type = "text"
               name = "fname"
@@ -174,7 +174,7 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
             <div className="form_form-group-icon">
               <AccountOutlineIcon />
             </div>
-            <input
+            <Input
               id="lname"
               type="text"
               name="lname"
@@ -193,7 +193,7 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
             <div className="form_form-group-icon">
               <MailRuIcon />
             </div>
-            <input
+            <Input
               id="email"
               type="email"
               ref="email"
@@ -213,7 +213,7 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
             <div className="form_form-group-icon">
               <KeyVariantIcon />
             </div>
-            <input
+            <Input
               id="password"
               ref="password"
               name="password"
@@ -234,7 +234,7 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
           </div>        
         </div>
         <div className="account_btns">
-          <Link id="submit" className="btn btn-primary account_btn" to={`/dashboard_default`} onClick={this.addUser}>Sign Up</Link>
+          <Link id="submit" className="btn btn-primary account_btn signup_btn" to={`/dashboard_default`} onClick={this.addUser}>Sign Up</Link>
         </div>
       </form>
     );

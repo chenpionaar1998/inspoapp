@@ -6,7 +6,7 @@ const validator: validatorType= {
                 test: (value: string) => {
                     return value.length > 0 && value.includes('@');
                 },
-                message: 'Invalid email input'
+                message: 'Invalid email input. Example: example@email.com'
             }
         ],
         errors: [],

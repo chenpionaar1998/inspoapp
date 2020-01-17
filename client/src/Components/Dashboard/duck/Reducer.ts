@@ -5,11 +5,13 @@ import {
     INSERT_PLAN_ACTION,
     FETCH_PLAN_ACTION, 
     EDIT_PLAN_ACTION,
-    DELETE_PLAN_ACTION
+    DELETE_PLAN_ACTION,
+    UPDATE_FETCH_STATE_ACTION
 } from './Types';
 import { TravelPlanInfoType } from '../../UIKit/PlanModal/types';
 
 const initialState: DashboardState = {
+    loaded: false,
     plans: []
 }
 
@@ -22,12 +24,14 @@ const Plans = ( state: DashboardState = initialState, action: DashboardAction): 
             plansArr = plansArr.concat(state.plans);
             
             return {
+                loaded: state.loaded,
                 plans: plansArr
             }
 
         case FETCH_PLAN_ACTION:
 
             return {
+                loaded: state.loaded,
                 plans: action.plans
             }
 
@@ -42,6 +46,7 @@ const Plans = ( state: DashboardState = initialState, action: DashboardAction): 
             })
 
             return {
+                loaded: state.loaded,
                 plans: plansArr
             }
 
@@ -53,7 +58,14 @@ const Plans = ( state: DashboardState = initialState, action: DashboardAction): 
             })
 
             return {
+                loaded: state.loaded,
                 plans: plansArr
+            }
+
+        case UPDATE_FETCH_STATE_ACTION: 
+            return {
+                loaded: action.loaded,
+                plans: state.plans
             }
 
         default:

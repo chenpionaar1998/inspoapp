@@ -8,7 +8,7 @@ export default class LoadingIndicator extends React.PureComponent {
                     <div className="loading_indicator"/>
                 </div>
                 <span>
-                    Fetching your plans from the database...
+                    Getting your plans ready for you...
                 </span>
             </div>
         )

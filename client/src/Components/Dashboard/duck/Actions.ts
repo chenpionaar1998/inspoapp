@@ -1,5 +1,6 @@
 // Libraries
 import { Dispatch } from "redux";
+import { batch } from "react-redux";
 
 // Types
 import { TravelPlanInfoType, UserPlanLinkType } from "../../UIKit/PlanModal/types";
@@ -15,7 +16,9 @@ import {
     EditPlanAction,
     DeletePlanAction,
     IDeletePlanAction,
-    DELETE_PLAN_ACTION
+    DELETE_PLAN_ACTION,
+    IUpdateFetchStateAction,
+    UPDATE_FETCH_STATE_ACTION
 } from "./Types";
 
 // Util
@@ -74,7 +77,10 @@ export function fetchPlansFromDB (username: string): FetchPlanAction {
                 .then(response => response.json())
                 .then(res => {
                     if (res.success) {
-                        return dispatch(fetchPlans(sortTravelPlans(res.plans)));
+                        return  batch (() => {
+                            dispatch(fetchPlans(sortTravelPlans(res.plans)));
+                            dispatch(updateFetchState(true));
+                        })
                     }
                 });
             }
@@ -139,5 +145,12 @@ function removePlan (planID: string): IDeletePlanAction {
     return {
         type: DELETE_PLAN_ACTION,
         planID: planID
+    }
+}
+
+function updateFetchState (loaded: boolean): IUpdateFetchStateAction {
+    return {
+        type: UPDATE_FETCH_STATE_ACTION,
+        loaded: loaded
     }
 }

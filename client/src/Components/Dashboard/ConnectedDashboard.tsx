@@ -12,7 +12,8 @@ import { AppState } from '../../RootReducer';
 
 const mapStateToProps = (state: AppState) => ({
     username: state.Account.userName,
-    plans: state.Plans.plans
+    plans: state.Plans.plans,
+    loaded: state.Plans.loaded
 });
 
 const ConnectedDashboard = connect(

@@ -17,6 +17,7 @@ import { linkUserToPlan } from "./duck/Actions";
 type DashboardProps = {
     username: string;
     plans: TravelPlanInfoType[];
+    loaded: boolean;
     createPlan: (formData: TravelPlanInfoType) => InsertPlanAction;
     editPlan: (formData: TravelPlanInfoType) => EditPlanAction;
     deletePlan: (userLink: UserPlanLinkType) => DeletePlanAction;
@@ -51,7 +52,7 @@ class Dashboard extends React.PureComponent<DashboardProps> {
                 </Row>
                 <Row>
                     <Col md={12} lg={12}>
-                        {this.props.plans.length === 0 &&  !this.props.username &&
+                        {!this.props.loaded &&
                             <LoadingIndicator />
                         }
                         <BoardItems

@@ -37,12 +37,15 @@ export default class BoardItem extends React.PureComponent<BoardItemProps> {
   render() {
     return (
       <div className="board">
-        <Link className="board_link" to={'/'}>
+        <div className="board_style">
           <div className="board_img-wrap">
-            <img className="board_img" src={""} alt="board-img" />
+            {/* <img className="board_img" src={""} alt="board-img" />  */}
+            <div className="board_img_rect"/>
           </div>
           <div className="board_info">
-            <h4 className="board_title">{this.props.item.title}</h4>
+            <Link className="board_link" to={'/'}>
+              <h4 className="board_title">{this.props.item.title}</h4>
+            </Link>
           <p className="board_description">{trimTimeString(this.props.item.start)}</p>
             {/*{item.collaborators.map((c, index) => (
               <span
@@ -50,7 +53,7 @@ export default class BoardItem extends React.PureComponent<BoardItemProps> {
               />
             ))} */}
           </div>
-        </Link>
+        </div>
         <div className="board_btn">
           <PlanModal
             item={this.props.item}

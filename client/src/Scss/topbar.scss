@@ -56,7 +56,7 @@
     background-position-y: center;
     background-position-x: left;
     background-size: contain;
-    display: none;
+    transition: none !important;
   
     @include themify($themes) {
       margin-left: 15px;
@@ -73,7 +73,6 @@
     right: 0;
     display: flex;
     height: 100%;
-    margin-right: 15px;
   }
   
   .topbar_left {
@@ -86,6 +85,7 @@
   
   .topbar_avatar {
     height: 100%;
+    width: 120px;
     display: flex;
     cursor: pointer;
     position: relative;
@@ -95,17 +95,16 @@
     box-shadow: none;
     padding: 0;
     background-color: transparent;
+    padding-right: 10px;
   
     &:hover, &:focus, &:active, &:focus:active {
-      @include themify($themes) {
-        background-color: themed('colorHover');
-      }
+      background-color: $color-light-gray
     }
   
     &:focus {
       outline: none;
     }
-  
+
     &:before {
       display: none;
     }
@@ -122,11 +121,11 @@
   }
   
   .topbar_avatar-name {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 18px;
     font-weight: 400;
     display: none;
-    margin-left: 10px;
+    margin-left: 40px !important;
   
     @include themify($themes) {
       color: themed('colorText');
@@ -174,6 +173,10 @@
     padding: 0;
     min-width: 160px;
     right: 0;
+    border-style: groove;
+    border-width: thin;
+    border-color: $color-light-gray;
+    margin-right: 1px;
   }
   
   .topbar_link {
@@ -768,12 +771,8 @@
     .topbar.topbar--navigation {
   
       .topbar_logo {
-        margin-left: 15px;
+        margin-left: 45px;
         display: block;
-      }
-  
-      .topbar_button.topbar_button--mobile {
-        display: none;
       }
   
       .topbar_avatar-name {

@@ -38,7 +38,7 @@ export default class TopBarProfile extends React.PureComponent<TopBarProfileProp
     render() {
         return (
             <div className="topbar_profile">
-            <button className="topbar_avatar" type="button" onClick={this.toggle}>
+            <button className="topbar_avatar" type="button" onClick={this.toggle} style={{backgroundColor: this.state.collapsed ? "#eeebeb" : ""}}>
               {/* <img className="topbar_avatar-img" src={this.Ava} alt="avatar" /> */}
               <p className="topbar_avatar-name">{capitalize(this.props.fname)}</p>
               <DownIcon className="topbar_icon" />

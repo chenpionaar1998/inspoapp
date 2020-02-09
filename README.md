@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This is a web application that helps users with making plans online using interactive calenders and sharable plan pages.
 
-To view this in action, please visit http://inspoapp.herokuapp.com/
+To view this in action, please visit https://inspoapp.herokuapp.com/
 
 ## Technology
 This app is built with Facebook Create React App as a foundation and

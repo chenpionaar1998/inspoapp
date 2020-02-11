@@ -36,6 +36,10 @@
   @include themify($themes) {
     color: themed('colorIcon');
   }
+
+  &:hover{
+    font-weight: bold;
+  }
 }
 
 .modal_title-icon {

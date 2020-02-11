@@ -53,7 +53,11 @@ class Dashboard extends React.PureComponent<DashboardProps> {
                 <Row>
                     <Col md={12} lg={12}>
                         {!this.props.loaded &&
-                            <LoadingIndicator />
+                            <div className="boards_wrap">
+                                <div className="boards">
+                                    <LoadingIndicator/>   
+                                </div>
+                            </div> 
                         }
                         <BoardItems
                             username={this.props.username}

@@ -37,7 +37,7 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
 
 	componentDidUpdate(prevProps: SignInFormProps) {
 		if (this.props.signedIn && this.props.signedIn !== prevProps.signedIn) {
-			this.props.history.push('/dashboard_default');
+			this.props.history.push('/dashboard');
 		}
 	}
 
@@ -117,7 +117,7 @@ export default class SignInForm extends PureComponent<SignInFormProps, SignInFor
 				<div className="account_btns">
 					<Link
 						className="btn btn-primary account_btn signin_btn"
-						to={`/dashboard_default`}
+						to={`/dashboard`}
  						onClick={this.checkUser}
 					>
 						Sign In

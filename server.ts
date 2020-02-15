@@ -9,7 +9,7 @@ import { signUp } from './server/database/api/createUser';
 import { signIn } from './server/database/api/signInUser';
 import { getUser } from './server/database/api/findUser';
 import { createPlan, linkUserToPlan } from './server/database/api/createPlan';
-import { fetchPlansForUser, getPlansInfoWithID } from './server/database/api/fetchPlans';
+import { fetchPlansForUser, getPlansInfoWithID, getPlanInfoWithID } from './server/database/api/fetchPlans';
 import { editPlan, deletePlan } from './server/database/api/modifyPlan';
 
 dotenv.config();
@@ -128,6 +128,24 @@ app.post("/api/getPlansInfoWithID", async (req, res): Promise<void> => {
             res.send({ 
                 success: false,
                 plans: []
+            });
+        }
+    });
+});
+
+app.post("/api/getPlanInfoWithID", async (req, res): Promise<void> => {
+    const result = getPlanInfoWithID(req.body);
+    result.then(ress => {
+        if (ress) {
+            res.send({ 
+                success: true,
+                plan: ress.plan
+            });
+        }
+        else {
+            res.send({ 
+                success: false,
+                plan: {}
             });
         }
     });

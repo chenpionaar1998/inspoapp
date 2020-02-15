@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class LoadingIndicator extends React.PureComponent {
+export default class BoardsLoadingIndicator extends React.PureComponent {
     render() {
         return (
             <div className="board">

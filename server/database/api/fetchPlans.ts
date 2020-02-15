@@ -16,8 +16,16 @@ type getPlansInfoWithIDReqType = {
     planIDs: string[];
 }
 
+type getPlanInfoWithIDReqType = {
+    planID: string;
+}
+
 type getPlansInfoWithIDResType = {
     plans: TravelPlanInfoType[]
+}
+
+type getPlanInfoWithIDResType = {
+    plan: TravelPlanInfoType
 }
 
 export async function fetchPlansForUser(reqObj: fetchPlansForUserReqType): Promise<fetchPlansForUserResType> {
@@ -42,6 +50,22 @@ export async function getPlansInfoWithID(reqObj: getPlansInfoWithIDReqType): Pro
             end: res.rows[0].planenddate,
             timeCreated: res.rows[0].timecreated
         });
+    };
+
+    return response;
+}
+
+export async function getPlanInfoWithID(reqObj: getPlanInfoWithIDReqType): Promise<getPlanInfoWithIDResType> {
+    const res = await pool.query("SELECT * FROM travelPlans WHERE planID = ($1);", [reqObj.planID]);
+
+    let response = {
+        plan: {
+            planID: res.rows[0].planid,
+            title: res.rows[0].title,
+            start: res.rows[0].planstartdate,
+            end: res.rows[0].planenddate,
+            timeCreated: res.rows[0].timecreated
+        }
     };
 
     return response;

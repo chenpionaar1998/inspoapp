@@ -42,8 +42,8 @@
 
 //pages...
 @import './Components/Account/account.scss';              // pages/account/* (except profile)
-// @import 'containers/profile';              // pages/account/profile/*
+@import './Scss/profile.scss';              // pages/account/profile/*
 
 //objects...
-@import './Scss//objects/layout.scss';        // layout settings
+@import './Scss/objects/layout.scss';        // layout settings
 

@@ -8,6 +8,7 @@ import SignIn from '../Account/SignIn/SignIn';
 import ConnectedDashboard from '../Dashboard/ConnectedDashboard';
 import ConnectedPrivateRoute from './ConnectedPrivateRoute';
 import ConnectedTopNavigationBar from '../TopNavigationBar/ConnectedTopNavigationBar';
+import ConnectedPlanPage from '../PlanPage/ConnectedPlanPage';
 
 type RouterProp = {
     history: any;
@@ -15,14 +16,17 @@ type RouterProp = {
 }
 
 const wrappedRoutes = () => (
-    <div>
+    <>
         <ConnectedTopNavigationBar/>
         <div className="container_wrap">
-            <Route exact path="/dashboard_default">
+            <Route exact path="/dashboard">
                 <ConnectedDashboard/>
             </Route>
+            <Route exact path="/plan/:planID">
+                <ConnectedPlanPage/>
+            </Route>
         </div>
-    </div>
+    </>
 )
 
 export default class AppRouter extends React.PureComponent<RouterProp> {
@@ -33,21 +37,21 @@ export default class AppRouter extends React.PureComponent<RouterProp> {
                     <Route exact path="/">
                         {
                             this.props.signedIn ? 
-                                <Redirect to="/dashboard_default"/> :
+                                <Redirect to="/dashboard"/> :
                                 <SignIn history={this.props.history}/>
                         }
                     </Route>
                     <Route exact path="/signup">
                         {
                             this.props.signedIn ? 
-                                <Redirect to="/dashboard_default"/> :
+                                <Redirect to="/dashboard"/> :
                                 <SignUp history={this.props.history}/>
                         }
                     </Route>
                     <Route path="/signin">
                         {
                             this.props.signedIn ? 
-                                <Redirect to="/dashboard_default"/> :
+                                <Redirect to="/dashboard"/> :
                                 <SignIn history={this.props.history}/>
                         }
                     </Route>

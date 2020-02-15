@@ -59,7 +59,7 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
 
   componentDidUpdate(prevProps: SignUpFormProps) {
 		if (this.props.signedIn && this.props.signedIn !== prevProps.signedIn) {
-			this.props.history.push('/dashboard_default');
+			this.props.history.push('/dashboard');
 		}
 	}
 
@@ -234,7 +234,7 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
           </div>        
         </div>
         <div className="account_btns">
-          <Link id="submit" className="btn btn-primary account_btn signup_btn" to={`/dashboard_default`} onClick={this.addUser}>Sign Up</Link>
+          <Link id="submit" className="btn btn-primary account_btn signup_btn" to={`/dashboard`} onClick={this.addUser}>Sign Up</Link>
         </div>
       </form>
     );

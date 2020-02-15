@@ -12,7 +12,7 @@ import { EditPlanAction, DeletePlanAction } from '../../Dashboard/duck/Types';
 import { TravelPlanInfoType, UserPlanLinkType } from '../PlanModal/types';
 
 // Utils
-import { trimTimeString } from '../../../utils/strings';
+import { trimTimeString } from '../../../utils/time';
 
 type BoardItemProps = {
     item: TravelPlanInfoType;
@@ -22,7 +22,7 @@ type BoardItemProps = {
 }
 
 export default class BoardItem extends React.PureComponent<BoardItemProps> {
-  D = (e: React.MouseEvent): void => {
+  deletePlan = (e: React.MouseEvent): void => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -37,23 +37,25 @@ export default class BoardItem extends React.PureComponent<BoardItemProps> {
   render() {
     return (
       <div className="board">
-        <div className="board_style">
-          <div className="board_img-wrap">
-            {/* <img className="board_img" src={""} alt="board-img" />  */}
-            <div className="board_img_rect"/>
+        <Link to={`/plan/${this.props.item.planID}`}>
+          <div className="board_style">
+              <div className="board_img-wrap">
+                {/* <img className="board_img" src={""} alt="board-img" />  */}
+                <div className="board_img_rect"/>
+              </div>
+              <div className="board_info">
+                <Link className="board_link" to={`/plan/${this.props.item.planID}`}>
+                  <h4 className="board_title">{this.props.item.title}</h4>
+                </Link>
+              <p className="board_description">{trimTimeString(this.props.item.start)}</p>
+                {/*{item.collaborators.map((c, index) => (
+                  <span
+                    key={index}
+                  />
+                ))} */}
+              </div>
           </div>
-          <div className="board_info">
-            <Link className="board_link" to={'/'}>
-              <h4 className="board_title">{this.props.item.title}</h4>
-            </Link>
-          <p className="board_description">{trimTimeString(this.props.item.start)}</p>
-            {/*{item.collaborators.map((c, index) => (
-              <span
-                key={index}
-              />
-            ))} */}
-          </div>
-        </div>
+        </Link>
         <div className="board_btn">
           <PlanModal
             item={this.props.item}
@@ -65,7 +67,7 @@ export default class BoardItem extends React.PureComponent<BoardItemProps> {
           <button 
             className="lnr lnr-cross board_close-btn" 
             type="button" 
-            onClick={this.D} />
+            onClick={this.deletePlan} />
         </div>
       </div>
     )

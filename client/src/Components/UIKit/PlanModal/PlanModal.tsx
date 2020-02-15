@@ -9,7 +9,7 @@ import { InsertPlanAction, EditPlanAction } from '../../Dashboard/duck/Types';
 
 // Util
 import { isCreatePlan } from './util';
-import { trimTimeString } from '../../../utils/strings';
+import { trimTimeString } from '../../../utils/time';
 import { getCurrentTime } from '../../../utils/utils';
 
 type PlanModalProps = {
@@ -130,7 +130,7 @@ export default class PlanModal extends React.PureComponent<PlanModalProps, PlanM
 
     render() {
         return (
-            <div  className="theme-light wrapper squared-corner-theme blocks-with-shadow-theme top-navigation">
+            <div  className="theme-light wrapper blocks-with-shadow-theme top-navigation">
                 <Button
                     outline={false}
                     size='sm'

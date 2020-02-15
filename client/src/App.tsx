@@ -14,7 +14,7 @@ const history = createBrowserHistory();
 const App: React.FC = () => {
   return (
     <div className="theme-light">
-      <div className="wrapper squared-corner-theme blocks-with-shadow-theme top-navigation">
+      <div className="wrapper blocks-with-shadow-theme top-navigation">
         <ConnectedRouter history={history}/>
       </div>
     </div>

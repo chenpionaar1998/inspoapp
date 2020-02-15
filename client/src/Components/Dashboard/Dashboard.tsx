@@ -5,7 +5,7 @@ import { Col, Container, Row } from "reactstrap";
 // Components
 import PlanModal from '../UIKit/PlanModal/PlanModal';
 import BoardItems from "../UIKit/BoardItems/BoardItems";
-import LoadingIndicator from '../UIKit/LoadingIndicator';
+import BoardsLoadingIndicator from '../UIKit/LoadingState/BoardsLoadingIndicator';
 
 // Types
 import { TravelPlanInfoType, UserPlanLinkType } from '../UIKit/PlanModal/types';
@@ -55,7 +55,7 @@ class Dashboard extends React.PureComponent<DashboardProps> {
                         {!this.props.loaded &&
                             <div className="boards_wrap">
                                 <div className="boards">
-                                    <LoadingIndicator/>   
+                                    <BoardsLoadingIndicator/>   
                                 </div>
                             </div> 
                         }

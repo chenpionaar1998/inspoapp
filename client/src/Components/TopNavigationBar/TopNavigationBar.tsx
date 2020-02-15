@@ -21,7 +21,7 @@ export default class TopNavigationBar extends React.PureComponent<TopNavigationB
                 <div className="topbar topbar--navigation">
                     <div className="topbar_wrapper">
                     <div className="topbar_left">
-                        <Link className="topbar_logo" to="/dashboard_default/"/>
+                        <Link className="topbar_logo" to="/dashboard/"/>
                     </div>
                     <div className="topbar_right">
                         <TopBarProfile fname={this.props.fname} lname={this.props.lname} signOut={this.props.signOut}/>

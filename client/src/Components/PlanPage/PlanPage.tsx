@@ -8,6 +8,8 @@ import { ClearPlanAction, UpdateCurrentPlanAction } from "./duck/Types";
 
 // Components
 import PlanInfoCard from "../UIKit/PlanPageCards/PlanInfoCard";
+import CalendarContainer from "../Calendar/CalanderContainer";
+import FeatureContainer from "../PlanPageFeatureTabs/FeatureContainer";
 
 type PlanPageProps = {
     currentPlanID: string;
@@ -42,14 +44,12 @@ class PlanPage extends React.PureComponent<PlanPageProps> {
                                     planTitle={this.props.currentPlanTitle}
                                     planStartDate={this.props.currentPlanStartDate}
                                 />
-                                {/* <ActivityPageMain
-                                    planInfo={this.state.planInfo}
-                                    collabList={this.state.collaborators}
-                                />
-                                <ActivityPageCalendar planInfo={this.state.planInfo} /> */}
+                                <FeatureContainer />
                             </Row>
                         </Col>
-                        {/* <ActivityPageTabs activities={this.state.activities} planTitle={this.state.planInfo.title}/> */}
+                        <Col md={12} lg={12} xl={8}>
+                            <CalendarContainer/>
+                        </Col>
                     </Row>
                 </div>
             </Container>

@@ -24,8 +24,19 @@ type DashboardProps = {
     fetchPlansFromDB: (username: string) => FetchPlanAction;
 }
 
-class Dashboard extends React.PureComponent<DashboardProps> {
+type DashboardState = {
+    showLoadingState: boolean;
+}
+
+class Dashboard extends React.PureComponent<DashboardProps, DashboardState> {
+    state = {
+        showLoadingState: false
+    }
+
     componentDidMount () {
+        setTimeout(() => {
+            this.setState({showLoadingState: true});
+        }, 20);
         this.props.fetchPlansFromDB(this.props.username);
     }
 
@@ -52,7 +63,7 @@ class Dashboard extends React.PureComponent<DashboardProps> {
                 </Row>
                 <Row>
                     <Col md={12} lg={12}>
-                        {!this.props.loaded &&
+                        {!this.props.loaded && this.state.showLoadingState &&
                             <div className="boards_wrap">
                                 <div className="boards">
                                     <BoardsLoadingIndicator/>   

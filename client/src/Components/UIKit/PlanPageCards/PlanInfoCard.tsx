@@ -19,18 +19,18 @@ class PlanInfoCard extends React.PureComponent <PlanInfoCardProps> {
                     <CardBody className="profile_card">
                         <div className="profile_information">
                             <div className="profile_avatar_holder"/>
-                        {/* <a href="/gallery">
-                            <img src={Ava} alt="avatar" />
-                        </a> */}
-                        <div className="profile_data">
-                            <p className="profile_name">{this.props.planTitle}</p>
-                            <p className="profile_work">{mapTimeToString(this.props.planStartDate)}</p>
-                            {/* <EditAuthor planID={this.state.planID}/> */}
+                            {/* <a href="/gallery">
+                                <img src={Ava} alt="avatar" />
+                            </a> */}
+                            <div className="profile_data">
+                                <p className="profile_name">{this.props.planTitle}</p>
+                                <p className="profile_work">{mapTimeToString(this.props.planStartDate)}</p>
+                                {/* <EditAuthor planID={this.state.planID}/> */}
+                            </div>
                         </div>
-                        </div>
-                        <div className="profile_stats">
-                            {/* {this.state.collabList} */}
-                        </div>
+                        {/* <div className="profile_stats">
+                            {this.state.collabList}
+                        </div> */}
                     </CardBody>
                 </Card>
             </Col>

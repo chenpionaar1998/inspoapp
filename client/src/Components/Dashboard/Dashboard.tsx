@@ -47,8 +47,13 @@ class Dashboard extends React.PureComponent<DashboardProps, DashboardState> {
                     <Col md={12}>
                         <h3 className="page-title">Boards</h3>
                         <h3 className="page-subhead subhead">
-							{" "}
-							Click on a board to view your activity
+                            {this.props.loaded ?  (this.props.plans.length ? 
+                                <span>Click on a board to view your activity</span>:
+                                <span>Click on "Create Plan" to start a plan </span>) :
+                                // We want empty space here so that the card doesn't move once the DB call is completed 
+                                // and all cards are loaded 
+                                <span>&nbsp;</span>
+                            }
 						</h3>
                         <div className="board_createbtn">
 							<PlanModal

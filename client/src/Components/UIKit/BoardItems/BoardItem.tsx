@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 // Components
 import PlanModal from '../PlanModal/PlanModal';
 
+// Icons
+import ArrowRightIcon from "mdi-react/ArrowRightIcon";
+
 // Actions
 import { EditPlanAction, DeletePlanAction } from '../../Dashboard/duck/Types';
 
@@ -15,10 +18,10 @@ import { TravelPlanInfoType, UserPlanLinkType } from '../PlanModal/types';
 import { trimTimeString } from '../../../utils/time';
 
 type BoardItemProps = {
-    item: TravelPlanInfoType;
-    username: string;
-    editPlan: (formData: TravelPlanInfoType) => EditPlanAction;
-    deletePlan: (userLink: UserPlanLinkType) => DeletePlanAction;
+  item: TravelPlanInfoType;
+  username: string;
+  editPlan: (formData: TravelPlanInfoType) => EditPlanAction;
+  deletePlan: (userLink: UserPlanLinkType) => DeletePlanAction;
 }
 
 export default class BoardItem extends React.PureComponent<BoardItemProps> {
@@ -44,10 +47,12 @@ export default class BoardItem extends React.PureComponent<BoardItemProps> {
                 <div className="board_img_rect"/>
               </div>
               <div className="board_info">
-                <Link className="board_link" to={`/plan/${this.props.item.planID}`}>
-                  <h4 className="board_title">{this.props.item.title}</h4>
-                </Link>
-              <p className="board_description">{trimTimeString(this.props.item.start)}</p>
+                <h4 className="board_title">{this.props.item.title}</h4>
+                <p className="board_description">
+                  {trimTimeString(this.props.item.start)}
+                  &nbsp;<ArrowRightIcon size="12px"/>&nbsp;
+                  {trimTimeString(this.props.item.end)}
+                </p>
                 {/*{item.collaborators.map((c, index) => (
                   <span
                     key={index}

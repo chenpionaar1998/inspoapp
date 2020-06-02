@@ -9,10 +9,15 @@ To view this in action, please visit https://inspoapp.herokuapp.com/
 ## Technology
 This app is built with Facebook Create React App as a foundation and
 
+  ### Front-end
   - React
   - Redux
   - Typescript
   - Sass
+
+  ### Back-end
+  - Node
+  - Postgres
 
 ## Learn More
 

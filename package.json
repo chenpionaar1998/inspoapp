@@ -3,7 +3,6 @@
     "version": "0.1.0",
     "private": true,
     "main": "server.ts",
-    "type": "module",
     "dependencies": {
         "@fullcalendar/daygrid": "^4.4.0",
         "@fullcalendar/interaction": "^4.4.0",

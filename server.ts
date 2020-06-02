@@ -31,6 +31,16 @@ if (dev === "production") {
     });
 }
 
+app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https') {
+        res.redirect(`https://${req.header('host')}${req.url}`)
+    }
+    else {
+        next()
+
+    }
+})
+
 app.post("/api/signUp", async (req, res): Promise<void> => {
     const result = signUp(req.body);
     result.then(ress => {

@@ -3,7 +3,10 @@ import React from 'react';
 import {Card, CardBody, Col} from 'reactstrap';
 
 // Utils
-import { mapTimeToString } from "../../../utils/time";
+import { mapTimeToString } from "../../utils/time";
+
+// Components
+import EditCollaborators from '../Collaborators/EditCollaborators';
 
 type PlanInfoCardProps = {
     planID: string;
@@ -25,7 +28,7 @@ class PlanInfoCard extends React.PureComponent <PlanInfoCardProps> {
                             <div className="profile_data">
                                 <p className="profile_name">{this.props.planTitle}</p>
                                 <p className="profile_work">{mapTimeToString(this.props.planStartDate)}</p>
-                                {/* <EditAuthor planID={this.state.planID}/> */}
+                                <EditCollaborators planID={this.props.planID}/>
                             </div>
                         </div>
                         {/* <div className="profile_stats">

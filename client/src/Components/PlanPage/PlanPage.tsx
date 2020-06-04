@@ -7,7 +7,7 @@ import { getPlanIDFromURL } from "../../utils/url";
 import { ClearPlanAction, UpdateCurrentPlanAction } from "./duck/Types";
 
 // Components
-import PlanInfoCard from "../UIKit/PlanPageCards/PlanInfoCard";
+import PlanInfoCard from "./PlanInfoCard";
 import CalendarContainer from "../Calendar/CalanderContainer";
 import FeatureContainer from "../PlanPageFeatureTabs/FeatureContainer";
 
@@ -20,9 +20,6 @@ type PlanPageProps = {
 }
 
 class PlanPage extends React.PureComponent<PlanPageProps> {
-    state = {
-    }
-
     componentWillMount() {
         const planID = getPlanIDFromURL();
         this.props.getCurrentPlanInfo(planID);
@@ -48,7 +45,8 @@ class PlanPage extends React.PureComponent<PlanPageProps> {
                             </Row>
                         </Col>
                         <Col md={12} lg={12} xl={8}>
-                            <CalendarContainer/>
+                            <CalendarContainer
+                                planStartDate={this.props.currentPlanStartDate}/>
                         </Col>
                     </Row>
                 </div>

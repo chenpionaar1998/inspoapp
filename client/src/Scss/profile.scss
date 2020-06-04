@@ -55,10 +55,6 @@
   padding: 30px 40px;
   display: flex;
 
-  @include themify($themes) {
-    border-bottom: 1px solid themed('colorBorder');
-  }
-
   @media screen and (max-width: 320px) {
     width: 100%;
     flex-direction: column;
@@ -125,8 +121,11 @@
 }
 
 .profile_data {
+  position: absolute;
   padding-left: 25px;
-  width: calc(100% - 140px);
+  width: calc(100% - 220px);
+  left: 180px;
+  height: calc(100% - 90px);
 }
 
 .profile_name {
@@ -150,10 +149,11 @@
   line-height: 18px;
 }
 
-.profile_btn {
-  margin-top: 10px;
-  margin-bottom: 0;
-  padding: 8px 15px;
+.profile_editCollab {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 0 !important;
 }
 
 .profile_activity {
@@ -283,4 +283,10 @@
 
 .placeholder {
   height: 450px;
+}
+
+.form_wrapper {
+  position: absolute;
+  width: calc(100% - 25px);
+  height: calc(50% - 10px);
 }

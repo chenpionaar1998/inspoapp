@@ -13,7 +13,8 @@ import { AppState } from "../../RootReducer";
 const mapStateToProps = (state: AppState) => ({
     currentPlanID: state.PlanPage.planID,
     currentPlanTitle: state.PlanPage.title,
-    currentPlanStartDate: state.PlanPage.start
+    currentPlanStartDate: state.PlanPage.start,
+    currentPlanEndDate: state.PlanPage.end
 })
 
 const ConnectedPlanPage = connect(

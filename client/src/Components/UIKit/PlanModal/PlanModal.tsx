@@ -9,8 +9,7 @@ import { InsertPlanAction, EditPlanAction } from '../../Dashboard/duck/Types';
 
 // Util
 import { isCreatePlan } from './util';
-import { trimTimeString } from '../../../utils/time';
-import { getCurrentTime } from '../../../utils/utils';
+import { trimTimeString, getCurrentTime } from '../../../utils/time';
 
 type PlanModalProps = {
     username: string;

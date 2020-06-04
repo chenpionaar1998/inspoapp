@@ -15,6 +15,7 @@ type PlanPageProps = {
     currentPlanID: string;
     currentPlanTitle: string;
     currentPlanStartDate: string;
+    currentPlanEndDate: string;
     getCurrentPlanInfo: (planID: string) => UpdateCurrentPlanAction;
     clearPlanPage: () => ClearPlanAction;
 }
@@ -46,7 +47,8 @@ class PlanPage extends React.PureComponent<PlanPageProps> {
                         </Col>
                         <Col md={12} lg={12} xl={8}>
                             <CalendarContainer
-                                planStartDate={this.props.currentPlanStartDate}/>
+                                planStartDate={this.props.currentPlanStartDate}
+                                planEndDate={this.props.currentPlanEndDate}/>
                         </Col>
                     </Row>
                 </div>

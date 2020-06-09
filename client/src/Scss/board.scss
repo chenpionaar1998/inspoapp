@@ -57,29 +57,6 @@
     overflow: hidden;
   }
 
-  .board_img_rect_loading{
-    width: 100%;
-    height: 225px;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    overflow: hidden;
-
-    background: $color-light-gray;
-    background-image: linear-gradient(to right, $color-light-gray 0%, #edeef1 50%, $color-light-gray 100%);
-
-    background-repeat: repeat;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-fill-mode: forwards;
-    -webkit-animation-name: shimmer;
-    animation-name: shimmer;
-    -webkit-animation-duration: 2s;
-    animation-duration: 2s;
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    background-size: 500px 500px; 
-  }
-  
   @-webkit-keyframes shimmer {
     0% {
         background-position: 0px 0; 
@@ -122,24 +99,48 @@
     transition: all 0.3s;
   }
 
-  .board_title_loading {
-    height: 24px;
-    width: 120px;
-    display: flex;
+  // This CSS is for loading spinner for dashboard items
+  // https://loading.io/css/
+  .lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid $color-light-gray;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: $color-additional transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }  
+  // ends here
 
-    background: $color-light-gray;
-    background-image: linear-gradient(to right, $color-light-gray 0%, #edeef1 20%, $color-light-gray 40%, $color-light-gray 100%);
-
-    background-repeat: repeat;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-fill-mode: forwards;
-    -webkit-animation-name: shimmer;
-    animation-name: shimmer;
-    -webkit-animation-duration: 2s;
-    animation-duration: 2s;
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    background-size: 500px 500px; 
+  .boardItemLoadingWrapper {
+    width: 100%;
+    text-align: center;
   }
   
   .board_description {
@@ -148,50 +149,6 @@
     line-height: 17px;
   }
 
-  .board_description_loading {
-    margin-top: 3px;
-    height: 17px;
-    width: 150px;
-    display: flex;
-
-    background: $color-light-gray;
-    background-image: linear-gradient(to right, $color-light-gray 0%, #edeef1 20%, $color-light-gray 40%, $color-light-gray 100%);
-
-    background-repeat: repeat;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-fill-mode: forwards;
-    -webkit-animation-name: shimmer;
-    animation-name: shimmer;
-    -webkit-animation-duration: 2s;
-    animation-duration: 2s;
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    background-size: 500px 500px; 
- 
-  }
-
-  .account_btn_loading {
-    height: 35px;
-    width: 110px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-
-    background: $color-light-gray;
-    background-image: linear-gradient(to right, $color-light-gray 0%, #edeef1 20%, $color-light-gray 40%, $color-light-gray 100%);
-
-    background-repeat: repeat;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-fill-mode: forwards;
-    -webkit-animation-name: shimmer;
-    animation-name: shimmer;
-    -webkit-animation-duration: 2s;
-    animation-duration: 2s;
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    background-size: 500px 500px; 
-
-  }
-  
   .catalog-item_price {
     position: absolute;
     top: 0;
@@ -253,19 +210,6 @@
     &:hover{
       font-weight: bold;
     }
-  }
-
-  .board_close-btn_loading {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 14px;
-    width: 14px;
-    height: 14px;
-    padding: 0;
-    border: none;
-    background: transparent;
-    color: #6d6b6b5b;
   }
 
   .loader_container {

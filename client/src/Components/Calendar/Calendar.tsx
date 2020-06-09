@@ -14,15 +14,6 @@ type CalendarProps = {
 class Calendar extends React.PureComponent<CalendarProps> {
     CalendarRef: React.RefObject<FullCalendar> = React.createRef();
 
-    componentDidUpdate(prevProps: CalendarProps) {
-		if (this.props.planStartDate && this.props.planStartDate !== prevProps.planStartDate) {
-            let calendatAPI = this.CalendarRef.current?.getApi();
-            
-            calendatAPI?.gotoDate(this.props.planStartDate)
-
-		}
-	}
-
     render () {
         return (
             <div className="CalendarDashboard">

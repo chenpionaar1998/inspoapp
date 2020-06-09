@@ -135,12 +135,50 @@
   font-size: 27px;
 }
 
-.profile_work {
+.profile_name_loading {
+  height: 35px;
+  width: 100px;
+
+  background: $color-light-gray;
+  background-image: linear-gradient(to right, $color-light-gray 0%, #edeef1 20%, $color-light-gray 40%, $color-light-gray 100%);
+
+  background-repeat: repeat;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-mode: forwards;
+  -webkit-animation-name: shimmer;
+  animation-name: shimmer;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  background-size: 500px 500px; 
+}
+
+.profile_date {
   font-weight: 500;
   margin-bottom: 10px;
   opacity: 0.6;
   line-height: 18px;
   font-size: 20px;
+}
+
+.profile_date_loading {
+  height: 24px;
+  width: 150px;
+
+  background: $color-light-gray;
+  background-image: linear-gradient(to right, $color-light-gray 0%, #edeef1 20%, $color-light-gray 40%, $color-light-gray 100%);
+
+  background-repeat: repeat;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-mode: forwards;
+  -webkit-animation-name: shimmer;
+  animation-name: shimmer;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  background-size: 500px 500px; 
 }
 
 .profile_contact {
@@ -279,6 +317,26 @@
   height: 140px;
   background-color: $color-light-gray;
   border-radius: 3px;
+}
+
+.profile_avatar_holder_loading{
+  width: 140px;
+  height: 140px;
+  border-radius: 3px;
+
+  background: $color-light-gray;
+  background-image: linear-gradient(to right, $color-light-gray 0%, #edeef1 50%, $color-light-gray 100%);
+
+  background-repeat: repeat;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-mode: forwards;
+  -webkit-animation-name: shimmer;
+  animation-name: shimmer;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  background-size: 500px 500px; 
 }
 
 .placeholder {

@@ -133,7 +133,7 @@ export default class SignUpForm extends React.Component<SignUpFormProps, SignUpF
 
   hasValidatorError = (): boolean => {
     for (const field in this.validator) {
-      if (this.validator[field].errors) {
+      if (this.validator[field].errors.length !== 0) {
         return true;
       }
     }

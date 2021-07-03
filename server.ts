@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import express from "express";
 import bodyParser from "body-parser";
 import path from "path";
+import cors from "cors";
 
 // Api
 import { signUp } from './server/database/api/createUser';
@@ -12,12 +13,14 @@ import { createPlan, linkUserToPlan } from './server/database/api/createPlan';
 import { fetchPlansForUser, getPlansInfoWithID, getPlanInfoWithID } from './server/database/api/fetchPlans';
 import { editPlan, deletePlan } from './server/database/api/modifyPlan';
 
+
 dotenv.config();
 const app = express();
 
 const port = process.env.PORT || 5000;
 const dev = app.get('env');
 
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 

@@ -69,6 +69,7 @@ app.post("/api/signUp", async (req, res): Promise<void> => {
 });
 
 app.post("/api/signIn", async (req, res): Promise<void> => {
+    console.log(req.body)
     const result = signIn(req.body);
     result.then(ress => {
         if (ress) {

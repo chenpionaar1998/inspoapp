@@ -11,7 +11,8 @@ export async function findUser (email: string): Promise<boolean> {
 }
 
 export async function getUser (email: string): Promise<AccountInfoType> {
+    console.log(email)
     const user = await pool.query("SELECT * FROM users WHERE email=$1;", [email]);
-
+    console.log(user)
     return user.rows[0] as unknown as AccountInfoType;
 } 

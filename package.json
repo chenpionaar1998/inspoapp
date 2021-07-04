@@ -45,6 +45,7 @@
         "typescript": "^3.9.3",
         "uuid": "^3.4.0"
     },
+    "engines": { "node": "12.x" },
     "scripts": {
         "start": "HTTPS=true ts-node server.ts",
         "server": "HTTPS=true ts-node server.ts",

@@ -10,7 +10,6 @@ import { verifyPassword } from '../../utils/hash';
 
 export async function signIn (formData: SignInFormType): Promise<boolean> {
     // Check if user exists in the db
-    console.log("SIGN IN BE: ", formData)
     const foundUser = await findUser(formData.email);
     
     if (foundUser) {

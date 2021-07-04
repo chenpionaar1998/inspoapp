@@ -21,12 +21,6 @@ const dev = app.get('env');
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-// app.use((req, res, next) => {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     next();
-// })
-
 if (dev === "production") {
     app.disable("x-powered-by");
 
@@ -68,7 +62,6 @@ app.post("/api/signUp", async (req, res): Promise<void> => {
 });
 
 app.post("/api/signIn", async (req, res): Promise<void> => {
-    console.log(req.body)
     const result = signIn(req.body);
     result.then(ress => {
         if (ress) {

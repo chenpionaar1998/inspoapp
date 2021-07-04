@@ -7,12 +7,13 @@ import { AccountInfoType } from '../../../client/src/Components/Account/Signup/S
 export async function findUser (email: string): Promise<boolean> {
     const result = await pool.query("SELECT EXISTS(SELECT email FROM users WHERE email=$1);", [email]);
 
+    console.log("RESULT: ", result.rows[0].exists)
+
     return result.rows[0].exists;
 }
 
 export async function getUser (email: string): Promise<AccountInfoType> {
-    console.log(email)
     const user = await pool.query("SELECT * FROM users WHERE email=$1;", [email]);
-    console.log(user)
+    
     return user.rows[0] as unknown as AccountInfoType;
 } 

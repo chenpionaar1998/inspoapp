@@ -29,7 +29,8 @@ export default class TopBarProfile extends React.PureComponent<TopBarProfileProp
     collapsed: false
   }
 
-  // Ava = `${process.env.PUBLIC_URL}/img/ava.png`;
+  // Ava = `${process.env.PUBLIC_URL}/Shared/img/ava.png`;
+  Ava = "avatar.png"
 
   toggle = () => {
     this.setState(prevState => ({collapsed: !prevState.collapsed}));
@@ -39,8 +40,7 @@ export default class TopBarProfile extends React.PureComponent<TopBarProfileProp
     return (
       <div className="topbar_profile">
         <button className="topbar_avatar" type="button" onClick={this.toggle} style={{backgroundColor: this.state.collapsed ? "#eeebeb" : ""}}>
-          {/* <img className="topbar_avatar-img" src={this.Ava} alt="avatar" /> */}
-          <div className="topbar_avatar_holder"/>
+          <img className="topbar_avatar-img" src={this.Ava} alt="avatar" />
           <p className="topbar_avatar-name">{capitalize(this.props.fname) + " " + capitalize(this.props.lname)}</p>
           <DownIcon className="topbar_icon" />
         </button>

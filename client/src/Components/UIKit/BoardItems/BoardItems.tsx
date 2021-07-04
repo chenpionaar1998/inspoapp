@@ -25,6 +25,7 @@ export default class BoardItems extends React.PureComponent<BoardItemsProps> {
         <div className="boards">
           {this.props.items.map((item, i) => (
             <BoardItem
+              index={i}
               key={item.planID}
               item={item}
               username={this.props.username}

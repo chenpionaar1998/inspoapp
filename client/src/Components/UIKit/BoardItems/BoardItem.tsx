@@ -18,6 +18,7 @@ import { TravelPlanInfoType, UserPlanLinkType } from '../PlanModal/types';
 import { trimTimeString } from '../../../utils/time';
 
 type BoardItemProps = {
+  index: number;
   item: TravelPlanInfoType;
   username: string;
   editPlan: (formData: TravelPlanInfoType) => EditPlanAction;
@@ -37,14 +38,17 @@ export default class BoardItem extends React.PureComponent<BoardItemProps> {
     this.props.deletePlan(userLink);
   }
 
+  getRandomIndex = (max: number): number => {
+    return Math.floor(Math.random() * max)
+  }
+
   render() {
     return (
       <div className="board">
         <Link to={`/plan/${this.props.item.planID}`}>
           <div className="board_style">
               <div className="board_img-wrap">
-                {/* <img className="board_img" src={""} alt="board-img" />  */}
-                <div className="board_img_rect"/>
+                <img className="board_img" src={"scenery/scene" + (this.props.index % 6 + 1) + ".jpg"} alt="board-img" /> 
               </div>
               <div className="board_info">
                 <h4 className="board_title">{this.props.item.title}</h4>

@@ -109,14 +109,18 @@
     }
   }
   
-  .topbar_avatar-img, .topbar_avatar-name, .topbar_icon {
+  .topbar_avatar-name, .topbar_icon {
     margin: auto 0;
   }
   
   .topbar_avatar-img {
+    margin-right: 12px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
     border-radius: 50%;
-    height: 36px;
-    width: 36px;
+    height: 30px;
+    width: 30px;
   }
   
   .topbar_avatar-name {
@@ -718,14 +722,6 @@
         background-color: themed('colorBackgroundBody');
       }
     }
-  }
-
-  .topbar_avatar_holder {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: $color-light-gray;
-    margin: auto 15px;
   }
   
   @media screen and (min-width: 480px) {

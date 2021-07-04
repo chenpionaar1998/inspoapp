@@ -54,6 +54,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    border-radius: 5px;
     overflow: hidden;
   }
 
@@ -79,7 +80,7 @@
 
   .board_img {
     height: 100%;
-    width: auto;
+    width: 100%;
   }
 
   .board_img_rect {

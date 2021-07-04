@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import express from "express";
 import bodyParser from "body-parser";
 import path from "path";
-import cors from "cors";
 
 // Api
 import { signUp } from './server/database/api/createUser';
@@ -20,7 +19,6 @@ const app = express();
 const port = process.env.PORT || 5000;
 const dev = app.get('env');
 
-app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -35,6 +33,8 @@ if (dev === "production") {
 }
 
 app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     if (req.header('x-forwarded-proto') !== 'https') {
         res.redirect(`https://${req.header('host')}${req.url}`)
     }

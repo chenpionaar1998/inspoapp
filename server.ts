@@ -1,7 +1,6 @@
 // Libraries
 import dotenv from 'dotenv';
 import express from "express";
-import bodyParser from "body-parser";
 import path from "path";
 
 // Api
@@ -19,8 +18,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 const dev = app.get('env');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 // app.use((req, res, next) => {
 //     res.header("Access-Control-Allow-Origin", "*");

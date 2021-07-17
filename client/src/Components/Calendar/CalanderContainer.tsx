@@ -47,6 +47,7 @@ class CalendarContainer extends React.PureComponent<CalendarContainerProps, Cale
 				<CardBody className="profile_card--calendar">
                     <Calendar
                         planStartDate={this.props.planStartDate}
+                        planEndDate={this.props.planEndDate}
                         shouldDisplayCalendar={this.state.loaded}
                         dateHighlighter={this.dateHighlighter}
                         />

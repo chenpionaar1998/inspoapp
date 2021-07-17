@@ -5,8 +5,12 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
+// Util
+import { trimTimeString, getNextDate } from "../../utils/time"
+
 type CalendarProps = {
     planStartDate: string;
+    planEndDate: string;
     shouldDisplayCalendar: boolean;
     dateHighlighter: (cell: any) => void;
 }
@@ -41,9 +45,13 @@ class Calendar extends React.PureComponent<CalendarProps> {
                             eventDurationEditable={true}
                             defaultDate={this.props.planStartDate}
                             dayRender={this.props.dateHighlighter}
+                            validRange={{
+                                start: trimTimeString(this.props.planStartDate),
+                                end: getNextDate(this.props.planEndDate)
+                            }}
                         />:
                         <div>
-                            Hello
+                            Loading
                         </div>
                     }
                 </div>

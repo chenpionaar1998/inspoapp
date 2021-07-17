@@ -26,6 +26,13 @@ export const withInRange = (start: string, end: string, date: Date) => {
     return startDate <= date && date <= endDate;
 }
 
+export const getNextDate = (date: string): string => {
+    // Very sketchy solution
+    let day = new Date(date)
+    const [d, m, y] = [day.getDate(), day.getMonth(), day.getFullYear()]
+    return (m+1) < 10 ? y + "-0" + (m+1) + "-" + d : y + "-" + (m+1) + "-" + d
+}
+
 // Returns in format Wed, Jun 3, 2020 9:10 PM
 export const getCurrentTime = (): string => {
     return moment().format('llll');

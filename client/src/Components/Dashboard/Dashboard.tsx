@@ -45,7 +45,7 @@ class Dashboard extends React.PureComponent<DashboardProps, DashboardState> {
             <Container>
                 <Row>
                     <Col md={12}>
-                        <h3 className="page-title">Boards</h3>
+                        <h3 className="page-title">Your Boards</h3>
                         <h3 className="page-subhead subhead">
                             {this.props.loaded ?  (this.props.plans.length ? 
                                 <span>Click on a board to view your activity</span>:
@@ -83,6 +83,11 @@ class Dashboard extends React.PureComponent<DashboardProps, DashboardState> {
                         />
                     </Col>
 				</Row>
+                <Row>
+                    <Col md={12}>
+                        <h3 className="page-title">Boards shared with you</h3>
+                    </Col>
+                </Row>
             </Container>
         )
     }
